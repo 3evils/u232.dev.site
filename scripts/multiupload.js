@@ -1,0 +1,1 @@
+$(document).ready(function(e){$(".clone-torrent-form").click(function(e){e.preventDefault();var r=$(".torrent-seperator.clone-me").clone();r.find(":input").val(""),r.removeClass("clone-me"),r.insertBefore($(".torrent-seperator:last"))})});

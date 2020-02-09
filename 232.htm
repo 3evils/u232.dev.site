@@ -1,0 +1,811 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0030)http://u-232.com/pm_system.php -->
+<html xmlns="http://www.w3.org/1999/xhtml" class="wf-oswald-n4-active wf-opensans-n3-active wf-ptsansnarrow-n4-active wf-novasquare-n4-active wf-lobster-n4-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Language" content="en-us">
+        <!-- ####################################################### -->
+        <!-- #   This website is powered by U-232 V3               # -->
+        <!-- #   Download and support at: https://u-232.com        # -->
+        <!-- ####################################################### -->
+        <title>U-232 :: Mailbox</title>
+        <link rel="alternate" type="application/rss+xml" title="Latest Torrents" href="http://u-232.com/rss.php?passkey=171eabafc03b224b9e2a8b16ec472d67">
+
+     	<!-- favicon 
+      	=================================================== -->
+        <link rel="shortcut icon" href="http://u-232.com/favicon.ico">
+
+      	<!-- css 
+      	=================================================== -->
+        <link rel="stylesheet" href="./232_files/1.css" type="text/css">
+		<link rel="stylesheet" href="./232_files/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="./232_files/bootstrap-responsive.css" type="text/css">
+        <link rel="stylesheet" href="./232_files/colorpicker.css" type="text/css">
+        <link rel="stylesheet" href="./232_files/themeChanger.css" type="text/css">
+ 
+      	<!-- global javascript
+      	================================================== -->
+        <script type="text/javascript" src="./232_files/jquery-1.5.js"></script>
+        <script type="text/javascript" src="./232_files/jquery.status.js"></script>
+        <script type="text/javascript" src="./232_files/jquery.cookie.js"></script>
+		<script type="text/javascript" src="./232_files/help.js"></script>
+
+		<!-- template javascript
+		================================================== -->
+		<style type="text/css">#mlike{cursor:pointer;}</style>
+        <script type="text/javascript" src="./232_files/colorpicker.js"></script>
+        <script type="text/javascript" src="./232_files/themeChanger.js"></script>
+        <script type="text/javascript" src="./232_files/jquery.smoothmenu.js"></script>
+        <script type="text/javascript" src="./232_files/core.js"></script>
+
+        <script type="text/javascript">
+        /*<![CDATA[*/
+
+		$(function() {							// the like js
+		$('span[id*=mlike]').like232({
+						times : 5,            	// times checked 
+						disabled : 5,         	// disabled from liking for how many seconds
+						time  : 5,             	// period within check is performed
+						url : '/ajax.like.php'
+					});
+					
+		function do_update_sidebar()
+		{
+			
+			$('.lforums,.ltorrents').fadeOut(1000,function(){
+				$('.lforums,.ltorrents').empty().html("<div style='margin:0 auto;text-align:center;'><img src='http://i.imgur.com/LHLpA6r.gif'/></div>").fadeIn(1000,function(){
+				$.ajax({
+					type: 'post',
+					url: '/ajax/auto_loaders.php',
+					data: 'load=torrents',
+					success: function(data) 
+					{
+						$('.ltorrents').fadeOut(1500,function(){
+								$('.ltorrents').html(data).fadeIn(1500);});
+									
+					}
+				});	
+				
+				$.ajax({type: 'post',url: '/ajax/auto_loaders.php',data: 'load=forums',success: function(datas) {$('.lforums').fadeOut(1500,function(){$('.lforums').html(datas).fadeIn(1500);});}});
+			 
+			});
+		});
+
+		}
+		$('.sdbar').live('click',function(){
+			$('#sidebar').fadeIn(1000);
+		});
+			//$(window).scrollTop()
+
+				//alert($("#sidebar").offset().top);
+				setInterval(function() {
+				do_update_sidebar();
+}, 10000);
+/*
+var refreshId = setInterval(function(){
+      
+	  			
+				
+				
+				
+    }, 5000);*/
+
+		});
+        function themes() {
+        window.open('take_theme.php','My themes','height=150,width=200,resizable=no,scrollbars=no,toolbar=no,menubar=no');
+        }
+        function radio() {
+        window.open('radio_popup.php','My Radio','height=700,width=800,resizable=no,scrollbars=no,toolbar=no,menubar=no');
+        }
+		$('.ajaxform').live('submit',function(e) {
+			 e.preventDefault();
+			 var fos = $(this);
+			 
+			 var res = fos.find('input.results').data('result');
+			 $(res).hide().html("<br/><div style='margin:0 auto;text-align:center;'><img src='http://i.imgur.com/LHLpA6r.gif'/></div>").fadeIn(1000);
+			
+		     if(!res || res.length <= 0){$(res).html('Search Cannot Be empty now can it.');}
+			 else
+			 {
+				
+				$.ajax({
+				type: fos.attr('method'),
+				url: fos.attr('action'), 
+				data: fos.serialize(), 
+				success: function(data) {
+				
+				$(res).animate({"opacity":"0"},2000,function(){
+				$(res).html(data).animate({"opacity":"1"},2000);
+					});
+								                        
+					}
+				});
+			 }
+		   
+		 
+		});
+        /*]]>*/
+        </script>
+		
+        <!-- javascript goes here or in footer --><!-- css goes here --><link type="text/css" rel="stylesheet" href="./232_files/forums.css"><link type="text/css" rel="stylesheet" href="./232_files/style.css"><link type="text/css" rel="stylesheet" href="./232_files/style2.css"><link type="text/css" rel="stylesheet" href="./232_files/jquery.lightbox-0.5.css">
+        <!--[if lt IE 9]>
+        <script type='text/javascript' src='./templates/1/js/modernizr.custom.js'></script>
+	    <script type='text/javascript' src='http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js'></script>
+	    <script type='text/javascript' src='./templates/1/js/ie.js'></script>
+        <![endif]--><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald%7COpen+Sans:300%7CPT+Sans+Narrow%7CNova+Square%7CLobster&subset=latin,latin,latin,latin,latin">
+        </head>
+        <body class="background-15 h-style-1 text-1 skin-1">
+       <!-- Main Outer Container
+        =================================================== -->
+	     <div class="container">
+        <!--<header class='clearfix'>-->
+		<!-- Main Navigation
+		=================================================== -->
+		<div id="navigation" class="navigation">
+     		<ul>
+				<li><a href="http://u-232.com/pm_system.php#" class="child">Torrent<div class="downarrowclass"></div></a>
+					<ul class="sub-menu" style="display: none; top: 40px; visibility: visible;">
+						<li><a href="http://u-232.com/browse.php">Torrents</a></li>
+						<li><a href="http://u-232.com/requests.php">Requests</a></li>
+						<li><a href="http://u-232.com/offers.php">Offers</a></li>
+						<li><a href="http://u-232.com/needseed.php?needed=seeders">Need Seeds</a></li>
+						
+						<li><a href="http://u-232.com/upload.php">Upload</a></li>
+                        <li><a href="http://u-232.com/bookmarks.php">Bookmarks</a></li>
+					</ul><!--/ .sub-menu-->
+				</li>
+				<li><a href="http://u-232.com/pm_system.php#" class="child">General<div class="downarrowclass"></div></a>
+					<ul class="sub-menu" style="display: none; top: 40px; visibility: visible;">
+                        <li><a href="http://u-232.com/announcement.php">Site Announcements</a></li>
+                        <li><a href="http://u-232.com/topten.php">Statistics</a></li>
+                        <li><a href="http://u-232.com/faq.php">Faq</a></li>
+        				<li><a href="http://u-232.com/chat.php">IRC</a></li>
+                        <li><a href="http://u-232.com/staff.php">Staff</a></li>
+                        <li><a href="http://u-232.com/wiki.php">Wiki</a></li>
+						<li><a href="http://u-232.com/pm_system.php#" onclick="radio();">Radio</a></li>
+						<li><a href="http://u-232.com/rsstfreak.php">Torrent Freak</a></li>
+					</ul><!--/ .sub-menu-->
+				</li>
+				<li><a href="http://u-232.com/pm_system.php#" class="child">Games<div class="downarrowclass"></div></a>
+					<ul class="sub-menu" style="display: none; top: 40px; visibility: visible;">
+                    
+                    <li><a href="http://u-232.com/casino.php">Casino</a></li>
+                    
+                    <li><a href="http://u-232.com/blackjack.php">Blackjack</a></li>
+                    <li><a href="http://u-232.com/arcade.php">Arcade</a></li>
+                    </ul><!--/ .sub-menu-->
+				</li>
+				<li><a href="http://u-232.com/donate.php">Donate</a></li>
+				<li><a href="http://u-232.com/pm_system.php#" class="child">Forums<div class="downarrowclass"></div></a>
+					<ul class="sub-menu" style="display: none; top: 40px; visibility: visible;">
+                        <li><a href="http://u-232.com/forums.php">Tracker Forums</a></li>
+                        <li><a href="http://forum.u-232.com/index.php">SMF Support</a></li>
+					</ul>
+				</li>
+                <li> 
+				<a class="brand" href="http://u-232.com/bugs.php?action=bugs">Bug Respond</a></li>
+                <li>
+				<a class="brand" href="http://u-232.com/staffbox.php">Staff Messages</a></li>
+			</ul>
+			 <small><strong>
+			 &nbsp;&nbsp;21 Members in last 24 hours<br>&nbsp;&nbsp;Active User's&nbsp;[3]</strong></small>
+        </div>
+	 <div class="clear"></div>
+		<!-- END Main Navigation
+		=================================================== -->
+		<!-- Logo
+		=================================================== -->
+		<!-- U-232 Source - Print Logo (CSS Controled) -->
+			<div class="cl">&nbsp;</div>
+			<!-- Logo -->
+			<div id="logo">
+			<h1>U-232 V4<span>&nbsp;&nbsp;Code</span></h1>
+			<p class="description">&nbsp;&nbsp;&nbsp;<i>FTW</i></p>
+			</div>
+		<!-- End Logo
+		=================================================== -->
+		<!-- Platform Navigation
+		=================================================== -->
+		<div id="platform-menu" class="platform-menu">
+			<a href="http://u-232.com/index.php" class="home">Home</a>
+				<ul>
+					<li><a href="./232_files/232.htm">Messages</a></li>
+					<li><a href="http://u-232.com/usercp.php?action=default">Usercp</a></li>
+					
+					<li><a href="http://u-232.com/staffpanel.php">Admincp</a>
+					</li>
+					<li><a href="http://u-232.com/pm_system.php#" onclick="themes();">Theme</a></li>
+					<li><a href="http://u-232.com/pm_system.php#" onclick="language_select();">Language</a></li>
+					<!--<li><a href='javascript:void(0)' onclick='status_showbox()'>Status</a></li>-->
+					<li><a href="http://u-232.com/friends.php">Friends</a></li>
+					<li><a href="http://u-232.com/logout.php?hash_please=20263500da22681ea683fa75a92290c5">Logout</a></li>
+				</ul>
+			<div class="container-fluid">
+				<!--/ statusbar start-->
+					<div class="statusbar-container">
+       <!-- U-232 Source - Print Statusbar/User Menu -->
+       <script type="text/javascript">
+       //<![CDATA[
+       function showSlidingDiv(){
+       $('#slidingDiv').animate({'height': 'toggle'}, { duration: 1000 });
+       }
+       //]]>
+       </script>
+       <div id="base_usermenu"><span style="white-space: nowrap;"><a class="user_1325" href="http://u-232.com/userdetails.php?id=1325" target="_blank"><span style="color:#4080B0;"><b>Stillapunk</b></span></a></span>
+ &nbsp;&nbsp;&nbsp;<span id="clock">10:19:39 Pm</span>&nbsp;<span class="base_usermenu_arrow"><a href="http://u-232.com/pm_system.php#" onclick="showSlidingDiv(); return false;"><i class="icon-chevron-down"></i></a></span></div>
+       <div id="slidingDiv">
+       <div class="slide_head">:: Personal Stats</div>
+       <div class="slide_a">User Class</div><div class="slide_b">&nbsp;<a href="http://u-232.com/setclass.php"><b>(Sys0p)</b></a>&nbsp;</div>
+       <div class="slide_c">Reputation</div><div class="slide_d"> <img src="./232_files/reputation_pos.gif" border="0" alt="Reputation Power 10
+Stillapunk is an unknown quantity at this point" title="Reputation Power 10 Stillapunk is an unknown quantity at this point"></div>
+       <div class="slide_a">Invites</div><div class="slide_b"><a href="http://u-232.com/invite.php">1</a></div>
+       <div class="slide_c">Bonus Points</div><div class="slide_d"><a href="http://u-232.com/mybonus.php">234</a></div>
+       <div class="slide_a">Achievements</div><div class="slide_b"><a href="http://u-232.com/achievementhistory.php?id=1325">11</a></div>
+       <div class="slide_head">:: Torrent Stats</div>
+       <div class="slide_a">Share Ratio</div><div class="slide_b">---</div><div class="slide_c">Uploaded</div><div class="slide_d">0.00 kB</div><div class="slide_c">Uploading Files</div><div class="slide_d">0</div>
+       <div class="slide_a">Downloading Files</div><div class="slide_b">0</div>
+       <div class="slide_c">Connectable</div><div class="slide_d">N/A</div>
+        
+         
+       </div><script type="text/javascript">
+      function refrClock(){
+      var d=new Date();
+      var s=d.getSeconds();
+      var m=d.getMinutes();
+      var h=d.getHours();
+      var day=d.getDay();
+      var date=d.getDate();
+      var month=d.getMonth();
+      var year=d.getFullYear();
+      var am_pm;
+      if (s<10) {s="0" + s}
+      if (m<10) {m="0" + m}
+      if (h>12) {h-=12;am_pm = "Pm"}
+      else {am_pm="Am"}
+      if (h<10) {h="0" + h}
+      document.getElementById("clock").innerHTML=h + ":" + m + ":" + s + " " + am_pm;
+      setTimeout("refrClock()",1000);
+      }
+      refrClock();
+      </script></div>
+				<!--/ statusbar end-->
+				<!-- U-232 Source - Print Global Messages Start -->
+			</div>
+			<div id="base_globelmessage">
+				<div id="gm_taps">
+					<ul class="gm_taps">
+						<li><b>Current Site Alerts:</b></li><li>
+<a class="tooltip" href="http://u-232.com/pm_system.php#"><b class="btn btn-info btn-small">CrazyHour</b>
+<span class="custom info alert alert-info"><em>CrazyHour</em>
+Crazyhour...All torrents free<br>and triple upload credit!<br> starts in 11:06:18&nbsp;at May 7 2013, 03:54 AM</span></a></li>
+					</ul>
+				</div>
+			</div><!-- U-232 Source - Print Global Messages End -->
+		</div>
+	<div class="clearfix"></div>
+	<!-- End Platform Navigation and Global Messages 
+	======================================================= -->
+ <br>
+
+ 
+
+ 
+	<div id="base_content">
+	<!-- <table class='mainouter' cellspacing='0' cellpadding='10'>
+   <tr>
+   <td align='center' class='outer' style='padding-bottom: 10px'>-->
+   <div style="text-align: center;">
+        <a class="altlink" href="http://u-232.com/pm_system.php?action=search">Search Messages</a> || 
+        <a class="altlink" href="http://u-232.com/pm_system.php?action=edit_mailboxes">Mailbox Manager / PM settings</a> || 
+        <a class="altlink" href="http://u-232.com/pm_system.php?action=new_draft">Write New Draft</a> || 
+        <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox">In-box</a></div><br>
+    <a name="pm"></a>
+
+
+	<form action="./232_files/232.htm" method="post" name="checkme" onsubmit="return ValidateForm(this,&#39;pm&#39;)">
+    
+    <table  border="0" cellspacing="0" cellpadding="5" align="center" style="max-width:900px;">
+	
+
+    <tbody><tr>
+        <td class="colhead" align="center" colspan="5"><span class="font_size_1">41 / 500</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="font_size_5">Inbox</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="font_size_1">[ 8% full ]</span><br>
+        <img src="./232_files/progress-0.gif" alt="percent"></td>
+    </tr>
+    <tr>
+    <td class="one" align="right" colspan="5">
+    
+                                    <input type="hidden" name="action" value="view_mailbox">
+                                    <select name="box" onchange="location = this.options[this.selectedIndex].value;">
+                                    <option class="head" value="">Jump to:</option>
+                                    <option class="body" value="pm_system.php?action=view_mailbox&amp;box=1" selected="selected">Inbox</option>
+                                    <option class="body" value="pm_system.php?action=view_mailbox&amp;box=-1">Sentbox</option>
+                                    <option class="body" value="pm_system.php?action=view_mailbox&amp;box=-2">Drafts</option></select> <div style="text-align: center; font-weight: bold;"><img src="./232_files/arrow_prev.gif" alt="&lt;&lt;"> Prev&nbsp;&nbsp;&nbsp; 1  <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added&page=2">2</a>  <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added&page=3">3</a> &nbsp;&nbsp;&nbsp; <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added&page=2">Next <img src="./232_files/arrow_next.gif" alt="&gt;&gt;"></a></div>
+    </td>
+    </tr>
+    <tr>
+        <td class="colhead" width="1%">&nbsp;&nbsp;
+        
+        <input type="hidden" name="action" value="move_or_delete_multi"></td>
+        <td class="colhead" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=subject#pm" title="order by subject descending">Subject</a></td>
+        <td class="colhead" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=username#pm" title="order by member name descending">Sender</a></td>
+        <td class="colhead" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added#pm" title="order by date descending">Date</a></td>
+        <td class="colhead" width="1%"></td>
+    </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26354">forum</a></td>
+                    <td class="two" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=20" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_20" href="http://u-232.com/userdetails.php?id=20" target="_blank"><span style="color:#4080B0;"><b>autotron</b></span></a><img src="./232_files/star.png" alt="Donor" title="Donor"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=20">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=20">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Today, 02:02 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26354"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26349">No Subject</a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=252" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_252" href="http://u-232.com/userdetails.php?id=252" target="_blank"><span style="color:#4080B0;"><b>cm27</b></span></a><img src="./232_files/pirate.png" alt="Pirate" title="Pirate"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=252">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=252">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Yesterday, 08:44 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26349"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26343">Re: </a></td>
+                    <td class="two" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=252" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_252" href="http://u-232.com/userdetails.php?id=252" target="_blank"><span style="color:#4080B0;"><b>cm27</b></span></a><img src="./232_files/pirate.png" alt="Pirate" title="Pirate"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=252">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=252">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Yesterday, 06:41 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26343"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26340">Re: Re: Re: </a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=252" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_252" href="http://u-232.com/userdetails.php?id=252" target="_blank"><span style="color:#4080B0;"><b>cm27</b></span></a><img src="./232_files/pirate.png" alt="Pirate" title="Pirate"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=252">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=252">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Yesterday, 05:15 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26340"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26338">Re: </a></td>
+                    <td class="two" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=252" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_252" href="http://u-232.com/userdetails.php?id=252" target="_blank"><span style="color:#4080B0;"><b>cm27</b></span></a><img src="./232_files/pirate.png" alt="Pirate" title="Pirate"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=252">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=252">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Yesterday, 05:06 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26338"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26335">Re: Re: Re: Re: new class</a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=379" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_379" href="http://u-232.com/userdetails.php?id=379" target="_blank"><span style="color:#4080B0;"><b>RogueSurfer</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=379">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=379">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Yesterday, 04:55 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26335"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26333">Re: Re: new class</a></td>
+                    <td class="two" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=379" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_379" href="http://u-232.com/userdetails.php?id=379" target="_blank"><span style="color:#4080B0;"><b>RogueSurfer</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=379">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=379">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Yesterday, 04:42 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26333"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26331">new class</a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=379" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_379" href="http://u-232.com/userdetails.php?id=379" target="_blank"><span style="color:#4080B0;"><b>RogueSurfer</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=379">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=379">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Yesterday, 04:34 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26331"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26326">Re: </a></td>
+                    <td class="two" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=379" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_379" href="http://u-232.com/userdetails.php?id=379" target="_blank"><span style="color:#4080B0;"><b>RogueSurfer</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=379">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=379">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Yesterday, 10:55 AM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26326"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26301">Username changed</a></td>
+                    <td class="one" align="left"><span style="font-weight: bold;">System</span></td>
+                    <td class="one" align="left">May 4 2013, 09:58 AM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26301"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26299">Re: </a></td>
+                    <td class="two" align="left"><img width="40" src="https://u-232.com/img.php/2012/03/a8d808_recycle_big.gif" alt="avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=1" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_1" href="http://u-232.com/userdetails.php?id=1" target="_blank"><span style="color:#4080B0;"><b>Mindless</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=1">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=1">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">May 4 2013, 09:54 AM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26299"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26252">forums issue</a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=20" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_20" href="http://u-232.com/userdetails.php?id=20" target="_blank"><span style="color:#4080B0;"><b>autotron</b></span></a><img src="./232_files/star.png" alt="Donor" title="Donor"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=20">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=20">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">May 1 2013, 01:31 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26252"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26228">Re: </a></td>
+                    <td class="two" align="left"><img width="40" src="https://u-232.com/img.php/2012/03/a8d808_recycle_big.gif" alt="avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=1" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_1" href="http://u-232.com/userdetails.php?id=1" target="_blank"><span style="color:#4080B0;"><b>Mindless</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=1">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=1">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Apr 29 2013, 06:15 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26228"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26210">Re: </a></td>
+                    <td class="one" align="left"><img width="40" src="https://u-232.com/img.php/2012/03/a8d808_recycle_big.gif" alt="avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=1" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_1" href="http://u-232.com/userdetails.php?id=1" target="_blank"><span style="color:#4080B0;"><b>Mindless</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=1">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=1">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Apr 28 2013, 01:46 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26210"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26201">Re: Re: Re: </a></td>
+                    <td class="two" align="left"><img width="40" src="https://u-232.com/img.php/2012/03/a8d808_recycle_big.gif" alt="avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=1" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_1" href="http://u-232.com/userdetails.php?id=1" target="_blank"><span style="color:#4080B0;"><b>Mindless</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=1">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=1">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Apr 28 2013, 09:23 AM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26201"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26199">Re: </a></td>
+                    <td class="one" align="left"><img width="40" src="https://u-232.com/img.php/2012/03/a8d808_recycle_big.gif" alt="avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=1" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_1" href="http://u-232.com/userdetails.php?id=1" target="_blank"><span style="color:#4080B0;"><b>Mindless</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=1">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=1">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Apr 28 2013, 08:59 AM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26199"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26197">No Subject</a></td>
+                    <td class="two" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=252" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_252" href="http://u-232.com/userdetails.php?id=252" target="_blank"><span style="color:#4080B0;"><b>cm27</b></span></a><img src="./232_files/pirate.png" alt="Pirate" title="Pirate"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=252">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=252">add to blocks</a></span> ]</td>
+                    <td class="two" align="left">Apr 27 2013, 09:18 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26197"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26188">Re: </a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=379" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_379" href="http://u-232.com/userdetails.php?id=379" target="_blank"><span style="color:#4080B0;"><b>RogueSurfer</b></span></a></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=379">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=379">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Apr 27 2013, 02:41 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26188"></td>
+                </tr>
+                <tr>
+                    <td class="two" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="two" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26184">'New Achievement Earned!'</a></td>
+                    <td class="two" align="left"><span style="font-weight: bold;">System</span></td>
+                    <td class="two" align="left">Apr 27 2013, 01:30 PM</td>
+                    <td class="two" align="center"><input type="checkbox" name="pm[]" value="26184"></td>
+                </tr>
+                <tr>
+                    <td class="one" align="center"><img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"></td>
+                    <td class="one" align="left"><a class="altlink" href="http://u-232.com/pm_system.php?action=view_message&id=26177">No Subject</a></td>
+                    <td class="one" align="left">
+                <img width="40" src="./232_files/default_avatar.gif" alt="no avatar"><span style="white-space:nowrap;"><a href="http://u-232.com/userdetails.php?id=252" title="Sys0p">
+  <span style="font-weight: bold;"></span></a><span style="white-space: nowrap;"><a class="user_252" href="http://u-232.com/userdetails.php?id=252" target="_blank"><span style="color:#4080B0;"><b>cm27</b></span></a><img src="./232_files/pirate.png" alt="Pirate" title="Pirate"></span>
+</span>  [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=friend&targetid=252">add to friends</a></span> ] 
+                                           [ <span class="font_size_1"><a href="http://u-232.com/friends.php?action=add&type=block&targetid=252">add to blocks</a></span> ]</td>
+                    <td class="one" align="left">Apr 27 2013, 12:21 PM</td>
+                    <td class="one" align="center"><input type="checkbox" name="pm[]" value="26177"></td>
+                </tr>
+   <tr>
+   <td colspan="5" align="right" class="two">
+   [ <a class="altlink" href="javascript:SetChecked(1,'pm[]')"> select all</a> ] [ <a class="altlink" href="javascript:SetChecked(0,'pm[]')">un-select all</a>   ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <input type="submit" class="button" name="move" value="Move to" onmouseover="this.className=&#39;button_hover&#39;" onmouseout="this.className=&#39;button&#39;"> <select name="box">
+                                            <option class="body" value="1">Inbox</option>
+                                            <option class="body" value="-1">Sentbox</option>
+                                            <option class="body" value="-2">Drafts</option></select> or
+   <input type="submit" class="button" name="delete" value="Delete" onmouseover="this.className=&#39;button_hover&#39;" onmouseout="this.className=&#39;button&#39;"> selected messages.</td>
+   </tr>
+    <tr>
+        <td colspan="5" align="left">
+        <img src="./232_files/pn_inboxnew.gif" title="Unread Message" alt="Unread"> Unread Messages.<br>
+        <img src="./232_files/pn_inbox.gif" title="Read Message" alt="Read"> Read Messages.</td>
+    </tr>
+    </tbody></table>
+         <div style="text-align: center; font-weight: bold;"><img src="./232_files/arrow_prev.gif" alt="&lt;&lt;"> Prev&nbsp;&nbsp;&nbsp; 1  <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added&page=2">2</a>  <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added&page=3">3</a> &nbsp;&nbsp;&nbsp; <a class="altlink" href="http://u-232.com/pm_system.php?action=view_mailbox&box=1&page=0&order_by=added&page=2">Next <img src="./232_files/arrow_next.gif" alt="&gt;&gt;"></a></div><br>
+    <div align="center">
+    <table border="0" cellspacing="0" cellpadding="5" align="center" style="max-width:800px">
+    <tbody><tr>
+
+        <td align="center"><form action="./232_files/232.htm" method="post"><select name="amount_per_page" onchange="location = this.options[this.selectedIndex].value;"><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=20" selected="selected">20 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=30">30 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=40">40 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=50">50 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=60">60 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=70">70 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=80">80 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=90">90 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=100">100 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=125">125 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=150">150 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=175">175 PMs per page</option><option class="body" value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;change_pm_number=200">200 PMs per page</option></select><input type="hidden" name="box" value="1"></form></td>
+        <td align="center">
+    <form method="post" action="./232_files/232.htm">
+        <select name="show_pm_avatar" onchange="location = this.options[this.selectedIndex].value;">
+            <option value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;show_pm_avatar=yes">show avatars on PM list</option>
+            <option value="pm_system.php?action=view_mailbox&amp;box=1&amp;page=0&amp;order_by=added&amp;show_pm_avatar=no" selected="selected">don't show avatars on PM list</option>
+        </select>
+            <input type="hidden" name="box" value="1"></form></td>
+    </tr>
+    </tbody></table><br></div><!-- javascript goes here --><script type="text/javascript" src="./232_files/browse.js"></script><script type="text/javascript" src="./232_files/jquery.lightbox-0.5.min.js"></script><script type="text/javascript" src="./232_files/lightbox.js"></script><script type="text/javascript" src="./232_files/check_selected.js"></script>
+		<div class="row-fluid">
+			<fieldset><legend>Querys</legend>
+				<div class="box-content">
+					<table class="table  table-bordered">
+						<thead>
+							<tr>
+								<th align="center">ID</th>
+								<th align="center">Query Time</th>
+								<th align="left">Query String</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td align="center"><b><font color="green" title="Query good.">0.000791</font></b></td>
+								<td align="left">SELECT uploaded, downloaded, seedbonus, modcomment, bonuscomment FROM users WHERE id=1325<br></td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td align="center"><b><font color="green" title="Query good.">0.000100</font></b></td>
+								<td align="left">SELECT COUNT(id) FROM messages WHERE receiver = 1325 AND location = 1<br></td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>3</td>
+								<td align="center"><b><font color="red" title="You should optimize this query.">0.244542</font></b></td>
+								<td align="left">SELECT m.id AS message_id, m.sender, m.receiver, m.added, m.subject, m.unread, m.urgent, u.id, u.username, u.uploaded, u.downloaded, u.warned, u.suspended, u.enabled, u.donor, u.class, u.avatar, u.opt1, u.opt2,  u.leechwarn, u.chatpost, u.pirate, u.king, f.id AS friend, b.id AS blocked FROM messages AS m 
+                            LEFT JOIN users AS u ON u.id=m.sender 
+                            LEFT JOIN friends AS f ON f.userid = 1325 AND f.friendid = m.sender
+                            LEFT JOIN blocks AS b ON b.userid = 1325 AND b.blockid = m.sender
+                            WHERE receiver = 1325 AND location = 1 
+                            ORDER BY added DESC LIMIT 0,20<br></td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td align="center"><b><font color="green" title="Query good.">0.000112</font></b></td>
+								<td align="left">SELECT COUNT(id) AS count, seeder, connectable FROM peers WHERE userid=1325 GROUP BY seeder<br></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+		</div>    	<!-- external javascript 
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+
+		<!-- accordion library (optional, not used in demo)
+		<script type='text/javascript' src='templates/framework/js/bootstrap-collapse.js'></script> -->
+
+<!--</td></tr></table>--></form></div>
+		<div class="nav-collapse collapse">
+		<div class="container">
+			<div class="pull-left">
+			U-232 page was generated in 0.28882 seconds.<br>
+			Server was hit 4 time 's
+			<br><b><b>PHP:</b> 1.36 MB in 0.29s | 0.92% Memcached: 0.00265s Hits: 92.738% Misses: 7.262 % Items: 585</b><br><b>Uptime:</b>  17:48:19 up 7 days, 20:57,  2 users,  load average: 0.66, 0.71, 0.73
+
+			</div>
+			<div class="pull-right" align="right">
+			Powered by U-232 V4<br>
+			Using Valid <b>CSS3, HTML &amp; PHP</b><br>
+			Support Forum <b>Click <a href="https://forum.u-232.com/index.php">here</a></b><br>
+			| <a title="System View" rel="external" href="http://u-232.com/staffpanel.php?tool=system_view">System View</a> | <a rel="external" title="APC" href="http://u-232.com/staffpanel.php?tool=apc">APC Stats</a> | <a rel="external" title="Memcache" href="http://u-232.com/staffpanel.php?tool=memcache">Memcache</a>				
+			</div>
+		</div>
+		</div>
+		
+	</div>
+
+	<style>
+	 #sidebar { 
+
+	width: 250px;
+	float:left;
+	display:inline-block;
+	height:100%;
+	overflow:auto;
+	position: relative;
+	padding: 4px;
+	margin-left:0px;
+
+	
+ }
+
+ .pad5{padding : 5px;}
+ .centerd{text-align:center;}
+ .cleartop5{margin-top:5px;}
+ .cleartop{margin-top:25px;}
+ .clearbottom{margin-bottom:5px;}
+ .border{
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+
+				}
+				.fxdwidth{width:48px;}
+				.valign{vertical-align:sub;margin-left:3px;}
+	#flyer {
+	position:fixed;
+    top:60px;
+    left:-292px;
+    z-index: 999;
+    padding: 16px;
+    width:260px;
+	height:400px;
+    background-color:#fff;
+    color:#3d3d3d;
+	-webkit-border-radius: 0 5px 5px 0;
+	-moz-border-radius: 0 5px 5px 0;
+	border-radius: 0 5px 5px 0;
+}
+
+#clicker {
+    position:absolute;
+    right:-29px;
+    top:90px;
+    width:30px;
+    height:30px;
+    background:#000 url('http://i.imgur.com/MOGpHGe.jpg') no-repeat center center ;
+	background-size: 31px 31px;
+    border-radius:0 5px 5px 0;
+    -moz-border-radius:0 5px 5px 0;
+    -webkit-border-radius:0 5px 5px 0;
+	-webkit-transition: all .25s linear;
+	-moz-transition: all .25s linear;
+	-o-transition: all .25s linear;
+	transition: all .25s linear;
+}
+
+#clicker:hover {
+	-webkit-box-shadow: inset 0 0 10px #686868;
+	-moz-box-shadow: inset 0 0 10px #686868;
+	box-shadow: inset 0 0 10px #686868;
+}
+
+</style>
+	<!--  End main outer container
+	======================================================= -->
+	 <div id='flyer'>
+		
+ <div id='sidebar'>
+ 
+	
+	<div class='link-container shadow'>
+	<h4 class='centerd'>Quick Nav</h4>
+	<div class='border pad5'>
+		<a href='browse.php' class="btn btn-info btn-small fxdwidth">Torrents</a>
+		<a href='browse.php' class="btn btn-info btn-small fxdwidth">Forums</a>
+		<a href='browse.php' class="btn btn-info btn-small fxdwidth">Inbox</a>
+		<div class='cleartop5'></div>
+		<a href='browse.php' class="btn btn-info btn-small fxdwidth">Upload</a>
+		<a href='browse.php' class="btn btn-info btn-small fxdwidth">Staff</a>
+		<a href='browse.php' class="btn btn-info btn-small fxdwidth">Torrents</a>
+	</div>
+	</div>
+	
+	<div class='link-container shadow cleartop'>
+	<h4 class='centerd'>Search Torrents / Forums</h4>
+	<div class='border pad5'>
+	<form class='ajaxform' method='post' action='/ajax/latest-torrent-forum-search.php'>
+		<input type='text' name='search' />
+		<input type='hidden' class='results' data-result='.qsearch-res' />
+		<button type='submit' class="btn btn-info btn-small">Torrents</button>
+		<input type="radio" value="torrent" name='qsearch' checked='checked'><span class='valign'>Torrent</span>&nbsp;&nbsp;&nbsp;<input type="radio" value="forum" name='qsearch'><span class='valign'> Forum</span>
+		
+	</form>
+		<div class='qsearch-res'></div>
+		</div>
+	</div>
+	
+	<div class='lastest-torrent shadow cleartop'>
+	<h4 class='centerd'>Latest Torrents</h4>
+	<div class='border pad5'>
+	
+		<div class='ltorrents'></div>
+		
+	</div>
+	
+	
+	</div>
+	
+	<div class='lastest-forums shadow cleartop'>
+	<h4 class='centerd'>Latest Form Posts</h4>
+	<div class='border pad5'>
+	
+		<div class='lforums'></div>
+	</div>
+	
+	
+	
+	</div>
+  </div>
+		<a href="#" id="clicker"></a>
+		</div>
+		
+	<script>	
+	$(function() {
+	var hgt = $(window).height();
+	$('#flyer').css('height',hgt-130+'px');
+	
+	$('#sidebar').bind('mousewheel DOMMouseScroll', function(e) {
+    var scrollTo = 0;
+    e.preventDefault();
+    if (e.type == 'mousewheel') {
+        scrollTo = (e.originalEvent.wheelDelta * -1);
+    }
+    else if (e.type == 'DOMMouseScroll') {
+        scrollTo = 40 * e.originalEvent.detail;
+    }
+    $(this).scrollTop(scrollTo + $(this).scrollTop());
+    
+});
+
+	});
+	 var tt = $('#clicker');
+        tt.click(function() {
+		
+            if ($('#flyer').hasClass('visible')) {
+                $('#flyer').animate({left: -292}, 400, function() {
+                      $('#flyer').removeClass('visible').css('z-index', 998);
+                });
+            } else {
+                $('#flyer').css('z-index', 1000).animate({left: 0}, 400, function() {
+                      $('#flyer').addClass('visible');
+                });
+            }
+	});
+	</script>
+		
+	 <div id="control_panel">
+	 <a href="http://u-232.com/pm_system.php#" id="control_label"></a>
+	 <div id="nav" class="style_block clearfix"><span>Menu Skin:</span><ul><li><a href="http://u-232.com/skin-1" title="Light" class="skin-1"></a></li><li><a href="http://u-232.com/skin-2" title="Dark" class="skin-2"></a></li></ul></div><div id="backgrounds" class="style_block"><span>Backgrounds:</span><ul><li><a href="http://u-232.com/background-1" title="Background 1" class="background-1"></a></li><li><a href="http://u-232.com/background-2" title="Background 2" class="background-2"></a></li><li><a href="http://u-232.com/background-3" title="Background 3" class="background-3"></a></li><li><a href="http://u-232.com/background-4" title="Background 4" class="background-4"></a></li><li><a href="http://u-232.com/background-5" title="Background 5" class="background-5"></a></li><li><a href="http://u-232.com/background-6" title="Background 6" class="background-6"></a></li><li><a href="http://u-232.com/background-7" title="Background 7" class="background-7"></a></li><li><a href="http://u-232.com/background-8" title="Background 8" class="background-8"></a></li><li><a href="http://u-232.com/background-9" title="Background 9" class="background-9"></a></li><li><a href="http://u-232.com/background-10" title="Background 10" class="background-10"></a></li><li><a href="http://u-232.com/background-11" title="Background 11" class="background-11"></a></li><li><a href="http://u-232.com/background-12" title="Background 12" class="background-12"></a></li><li><a href="http://u-232.com/background-13" title="Background 13" class="background-13"></a></li><li><a href="http://u-232.com/background-14" title="Background 14" class="background-14"></a></li><li><a href="http://u-232.com/background-15" title="Background 15" class="background-15"></a></li></ul></div><div class="style_block"><span>Heading Font:</span><select id="heading_style"><option value="h-style-1" selected="selected">Oswald</option><option value="h-style-2">PT Sans Narrow</option><option value="h-style-3">Nova Square</option><option value="h-style-4">Lobster</option></select></div><div class="style_block"><span>Content Font:</span><select id="text_style"><option value="text-1" selected="selected">Arial</option><option value="text-2">Tahoma</option><option value="text-3">Verdana</option><option value="text-4">Calibri</option></select></div><div class="links_color_wrapper clearfix"><span>Links Color:</span><div id="linkspicker" class="colorPicker" style="background-color: rgb(241, 91, 25);"></div></div><div class="restore_button_wrapper"><a id="restore_button" class="button small dark">Reset</a></div></div>
+    <!-- Ends Footer -->
+
+    <script type="text/javascript" src="./232_files/general.js"></script><script type="text/javascript" src="./232_files/jquery.smoothmenu.js"></script><script type="text/javascript" src="./232_files/jflickrfeed.min.js"></script><script src="./232_files/webfont.js" type="text/javascript" async=""></script>
+    
+<div class="colorpicker" id="collorpicker_603"><div class="colorpicker_color" style="background-color: rgb(255, 77, 0);"><div><div style="left: 134px; top: 8px;"></div></div></div><div class="colorpicker_hue"><div style="top: 142px;"></div></div><div class="colorpicker_new_color" style="background-color: rgb(241, 90, 25);"></div><div class="colorpicker_current_color" style="background-color: rgb(241, 90, 25);"></div><div class="colorpicker_hex"><input type="text" maxlength="6" size="6"></div><div class="colorpicker_rgb_r colorpicker_field"><input type="text" maxlength="3" size="3"><span></span></div><div class="colorpicker_rgb_g colorpicker_field"><input type="text" maxlength="3" size="3"><span></span></div><div class="colorpicker_rgb_b colorpicker_field"><input type="text" maxlength="3" size="3"><span></span></div><div class="colorpicker_hsb_h colorpicker_field"><input type="text" maxlength="3" size="3"><span></span></div><div class="colorpicker_hsb_s colorpicker_field"><input type="text" maxlength="3" size="3"><span></span></div><div class="colorpicker_hsb_b colorpicker_field"><input type="text" maxlength="3" size="3"><span></span></div><div class="colorpicker_submit"></div></div></body></html>

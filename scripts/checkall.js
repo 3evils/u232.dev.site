@@ -1,0 +1,1 @@
+var checkflag="false",marked_row=new Array;function check(e){if("false"==checkflag){for(i=0;i<e.length;i++)e[i].checked=!0;checkflag="true"}else{for(i=0;i<e.length;i++)e[i].checked=!1;checkflag="false"}}

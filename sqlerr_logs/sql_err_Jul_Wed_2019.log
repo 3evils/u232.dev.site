@@ -1,0 +1,9 @@
+
+===================================================
+ Date: Wed, 31 Jul 2019 19:48:02 +0100
+ Error Number: 1062
+ Error: Duplicate entry 'Neon' for key 'username'
+ IP Address: 109.129.11.223
+ in file /var/www/takesignup.php on line 132
+ URL:/takesignup.php
+ Username: []

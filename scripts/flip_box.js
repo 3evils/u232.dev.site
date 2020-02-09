@@ -1,0 +1,1 @@
+function flipBox(e){var o;-1==document.images["b_"+e].src.indexOf("_on")?(o=document.images["b_"+e].src.replace("_off","_on"),document.getElementById("box_"+e).style.display="none",document.images["b_"+e].src=o):(o=document.images["b_"+e].src.replace("_on","_off"),document.getElementById("box_"+e).style.display="block",document.images["b_"+e].src=o)}

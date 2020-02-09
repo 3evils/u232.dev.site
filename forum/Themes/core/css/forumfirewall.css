@@ -1,0 +1,27 @@
+/**********************************************************************************
+* forumfirewall.css - ForumFirewall hover background for admin section
+* Version 1.0.0 by JMiller a/k/a butchs
+*********************************************************************************
+* This program is distributed in the hope that it is and will be useful, but
+* WITHOUT ANY WARRANTIES; without even any implied warranty of MERCHANTABILITY
+* or FITNESS FOR A PARTICULAR PURPOSE.
+**********************************************************************************/
+
+/* main board hovers */
+.windowbg_hover:hover,.windowbg_hoverHover, tr.windowbg_hover:hover td,tr.windowbg_hoverHover td, .windowbg_hover:hover a, .windowbg_hoverHover a
+{
+	color: green;					/* hover text color */
+	background: #dcdce4;			/* hover background color */
+}
+
+.windowbg2_hover:hover,.windowbg2_hoverHover, tr.windowbg2_hover:hover td,tr.windowbg2_hoverHover td, .windowbg2_hover:hover a, .windowbg2_hoverHover a
+{
+	color: green;					/* hover text color */
+	background: #dde5ed;			/* hover background color */
+}
+
+.forumfirewall_fail
+{
+	font-weight: bold;
+	color: red;
+}

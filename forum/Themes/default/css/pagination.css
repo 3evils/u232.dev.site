@@ -1,0 +1,31 @@
+/* Smart Pagination */
+.pagelinks strong,
+.pagesection strong,
+.mlist_above strong,
+#mlist_below strong,
+.smalllinks strong
+{
+	background: #CFE2FD;
+	border: 1px solid #8FC6F8;
+	color: #3E3E3E;
+	padding: 2px 6px;
+	margin-right: 3px;
+}
+.navPages, small[id*="pages"] a{
+	border: 1px solid #BAD6FD;
+	color: #666666;
+	padding: 2px 6px;
+	text-decoration: none;
+}
+.navPages:hover, small[id*="pages"] a:hover{
+	background: #DFEBFD;
+	border: 1px solid #BAD6FD;
+	color: #666666;
+	text-decoration: none;
+}
+a[href="#top"], a[href="#bot"], a[href="#lastPost"] {
+	background: none transparent !important;
+}
+a[href="#top"]:hover, a[href="#bot"]:hover, a[href="#lastPost"]:hover {
+	text-decoration: none;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package-info xmlns="Alphabetic_Smileys" xmlns:smf="http://www.simplemachines.org/">
+  <id>ItsVoid:FlatEmoji</id>
+  <name>Flat Emoji (Twitter Emoji)</name>
+  <version>1.0</version>
+  <type>modification</type>
+  <install for="2.0 - 2.0.99">
+    <require-dir name="flat_emoji" destination="$smileysdir" />
+	<readme type="file" parsebbc="true">license.txt</readme>
+	<redirect url="index.php?action=admin;area=smileys" timeout="5000">redirect.txt</redirect>
+  </install>
+  <uninstall for="2.0 - 2.0.99">
+    <remove-dir name="$smileysdir/flat_emoji" />
+  </uninstall>
+</package-info>

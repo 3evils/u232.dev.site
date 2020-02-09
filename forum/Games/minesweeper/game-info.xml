@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Generated with SMF Arcade 2.5 Beta 2 rev1119 -->
+<game-info>
+	<id>minesweeper</id>
+	<name><![CDATA[Minesweeper]]></name>
+	<description><![CDATA[]]></description>
+	<help><![CDATA[]]></help>
+	<thumbnail>thumbnail.png</thumbnail>
+	<thumbnail-small>thumbnail2.png</thumbnail-small>
+	<file>minesweeper.php</file>
+	<scoring>0</scoring>
+	<submit>custom_game</submit>
+</game-info>

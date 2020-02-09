@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<name>SMFPacks Shoutbox</name>
+	<id>nibogo:shoutBox</id>
+	<type>modification</type>
+	<version>1.0</version>
+	<!-- 1.1.x -->
+	<install for="1.1-1.1.99">
+		<readme type="file" parsebbc="true">readme.txt</readme>
+		<redirect url="?action=manageshoutbox" type="inline">SMFPacks Shoutbox has been installed now you're going to be redirected to its admin panel.</redirect>
+		<modification>smf-1.1.x_install.xml</modification>
+		<require-dir name="Themes" destination="$boarddir" />
+		<require-file name="Sources_1.1.x/Subs-Shoutbox.php" destination="$sourcedir" />
+		<require-file name="Sources_1.1.x/Shoutbox.php" destination="$sourcedir" />
+		<require-file name="Sources_1.1.x/ManageShoutbox.php" destination="$sourcedir" />
+		<code>smf-1.1.x_install.php</code>
+	</install>
+
+	<upgrade for="1.1-1.1.99" from="2.0.1">
+		<redirect url="?action=manageshoutbox" timeout="5000" type="inline">Thank you for using SMFPacks Shoutbox.</redirect>
+		<modification>smf-1.0.x_upgrade.xml</modification>
+		<require-file name="Themes/default/languages/Shoutbox.english.php" destination="$boarddir/Themes/default/languages" />
+		<require-file name="Themes/default/Shoutbox.template.php" destination="$boarddir/Themes/default" />
+		<require-file name="Themes/default/ManageShoutbox.template.php" destination="$boarddir/Themes/default" />
+		<require-file name="Sources_1.1.x/Shoutbox.php" destination="$sourcedir" />
+	</upgrade>
+
+	<uninstall for="1.1-1.1.99">
+		<modification reverse="true">smf-1.1.x_install.xml</modification>
+		<remove-file error="skip" name="$sourcedir/ManageShoutbox.php" />
+		<remove-file error="skip" name="$sourcedir/Shoutbox.php" />
+		<remove-file error="skip" name="$themedir/ManageShoutbox.template.php" />
+		<remove-file error="skip" name="$themedir/Shoutbox.template.php" />
+		<remove-file error="skip" name="$themedir/shoutbox.js" />
+		<remove-file error="skip" name="$themedir/shoutbox_moderation.js" />
+		<remove-file error="skip" name="$themedir/shoutbox.swf" />
+		<remove-file error="skip" name="$themedir/shoutbox.mp3" />
+		<remove-file error="skip" name="$languagedir/Shoutbox.english.php" />
+		<remove-file error="skip" name="$imagesdir/loading.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/bgcolor.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/fontcolor.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/nosound.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/smileys.gif" />
+		<code>smf-1.1.x_uninstall.php</code>
+	</uninstall>
+
+	<!-- 2.0.x -->
+	<install for="2.0 RC3">
+		<readme type="file" parsebbc="true">readme.txt</readme>
+		<redirect url="?action=admin;area=shoutbox" type="inline">SMFPacks Shoutbox has been installed now you're going to be redirected to its admin panel.</redirect>
+		<modification>smf-2.0.x_install.xml</modification>
+		<require-dir name="Themes" destination="$boarddir" />
+		<require-file name="Sources_2.0.x/Subs-Shoutbox.php" destination="$sourcedir" />
+		<require-file name="Sources_2.0.x/Shoutbox.php" destination="$sourcedir" />
+		<require-file name="Sources_2.0.x/ManageShoutbox.php" destination="$sourcedir" />
+		<code>smf-2.0.x_install.php</code>
+	</install>
+
+	<upgrade for="2.0-2.0.99" from="2.0.1">
+		<redirect url="?action=admin;area=shoutbox" timeout="5000" type="inline">Thank you for using SMFPacks Shoutbox.</redirect>
+		<modification>smf-2.0.x_upgrade.xml</modification>
+		<require-file name="Themes/default/languages/Shoutbox.english.php" destination="$boarddir/Themes/default/languages" />
+		<require-file name="Themes/default/Shoutbox.template.php" destination="$boarddir/Themes/default" />
+		<require-file name="Themes/default/ManageShoutbox.template.php" destination="$boarddir/Themes/default" />
+		<require-file name="Sources_2.0.x/Shoutbox.php" destination="$sourcedir" />
+	</upgrade>
+
+	<uninstall for="2.0 RC3">
+		<modification reverse="true">smf-2.0.x_install.xml</modification>
+		<remove-file error="skip" name="$sourcedir/ManageShoutbox.php" />
+		<remove-file error="skip" name="$sourcedir/Shoutbox.php" />
+		<remove-file error="skip" name="$themedir/ManageShoutbox.template.php" />
+		<remove-file error="skip" name="$themedir/Shoutbox.template.php" />
+		<remove-file error="skip" name="$themedir/shoutbox.js" />
+		<remove-file error="skip" name="$themedir/shoutbox_moderation.js" />
+		<remove-file error="skip" name="$themedir/shoutbox.swf" />
+		<remove-file error="skip" name="$themedir/shoutbox.mp3" />
+		<remove-file error="skip" name="$languagedir/Shoutbox.english.php" />
+		<remove-file error="skip" name="$imagesdir/loading.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/bgcolor.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/fontcolor.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/nosound.gif" />
+		<remove-file error="skip" name="$imagesdir/bbc/smileys.gif" />
+		<code>smf-2.0.x_uninstall.php</code>
+	</uninstall>
+</package-info>

@@ -1,0 +1,15 @@
+[Unit]
+Description=Ocelot Tracker
+After=network-online.target mysql.service
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+UMask=007
+ExecStart=/usr/bin/screen -dmS ocelot /usr/local/bin/ocelot -c /var/www/ocelot.conf
+ExecStop=/usr/bin/pkill ocelot
+RemainAfterExit=yes
+# Configures the time to wait before service is stopped forcefully.
+TimeoutStopSec=300
+[Install]
+WantedBy=multi-user.target

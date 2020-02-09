@@ -1,0 +1,109 @@
+<?php
+/**
+ |--------------------------------------------------------------------------|
+ |   https://github.com/Bigjoos/                                            |
+ |--------------------------------------------------------------------------|
+ |   Licence Info: WTFPL                                                    |
+ |--------------------------------------------------------------------------|
+ |   Copyright (C) 2010 U-232 V5                                            |
+ |--------------------------------------------------------------------------|
+ |   A bittorrent tracker source based on TBDev.net/tbsource/bytemonsoon.   |
+ |--------------------------------------------------------------------------|
+ |   Project Leaders: Mindless, Autotron, whocares, Swizzles.               |
+ |--------------------------------------------------------------------------|
+  _   _   _   _   _     _   _   _   _   _   _     _   _   _   _
+ / \ / \ / \ / \ / \   / \ / \ / \ / \ / \ / \   / \ / \ / \ / \
+( U | - | 2 | 3 | 2 )-( S | o | u | r | c | e )-( C | o | d | e )
+ \_/ \_/ \_/ \_/ \_/   \_/ \_/ \_/ \_/ \_/ \_/   \_/ \_/ \_/ \_/
+ */
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR . 'bittorrent.php';
+require_once INCL_DIR . 'user_functions.php';
+require_once INCL_DIR . 'html_functions.php';
+require_once INCL_DIR . 'getpre.php';
+dbconn(false);
+loggedinorreturn();
+
+$lang = load_language('global');
+
+
+
+$HTMLOUT = '';
+
+$HTMLOUT .= "<div class='panel panel-default'>
+    <table class='table table-bordered table-striped'>
+ <thead>
+            <tr>
+                <th colspan=2  class='text-center'>
+                <a href='tv_guide.php?country=US'>USA TV Schedule</a>&nbsp;&nbsp;
+                <a href='tv_guide.php?country=GB'>UK TV Schedule</a>&nbsp;&nbsp;
+                <a href='tv_guide.php?country=FR'>France TV Schedule</a>&nbsp;&nbsp;
+                <a href='tv_guide.php?country=IE'>Ireland TV Schedule</a>&nbsp;&nbsp;
+                <a href='tv_guide.php?country=SE'>Sweden TV Schedule</a>&nbsp;&nbsp;
+                <a href='tv_guide.php?country=DE'>Germany TV Schedule</a>
+                </th>
+            </tr>
+";
+$lcountry = (isset($_REQUEST['country']))? $_REQUEST["country"]:"US";
+if (($tvsched = $mc1->get_value('schedule_'.$lcountry)) === false) {
+    $tvmaze = file_get_contents('https://api.tvmaze.com/schedule?country='.$lcountry);
+    $tvsched = json_decode($tvmaze, true);
+if (count($tvsched) > 0)
+    $mc1->cache_value('schedule_'.$lcountry, $tvsched, 60 * 60);
+}
+    switch ($lcountry) {
+        case "US":
+            $dcountry = "Usa";
+            break;
+        case "GP":
+            $dcountry = "United Kingdom";
+            break;
+        case "FR":
+            $dcountry = "France";
+            break;
+        case "IE":
+            $dcountry = "Ireland";
+            break;
+        case "SE":
+            $dcountry = "Sweden";
+            break;
+        case "DE":
+            $dcountry = "Germany";
+            break;
+    }
+
+$HTMLOUT .= " <tr>
+                <th colspan=2>Upcoming ".$dcountry ." TV Schedule</th>
+            </tr>
+        </thead>";
+
+foreach ($tvsched as $key => $item) {
+    if (strtotime($item['airstamp']) > TIME_NOW) {
+        $airimg = ($item['show']['image']['medium']!='') ? "<img src='".$item['show']['image']['medium']."'></img>":"<img src='" .$INSTALLER09['pic_base_url']."/noposter.png' style='height:295px;'></img>";
+        $HTMLOUT .= "<td class='tv_cat_col squashp  browsep' >
+<div class='text-center'>".$airimg."</div><br>";
+
+if(!is_null($item['summary'])) {
+$descr=  ($item['summary']);
+$result = wordwrap($descr, 36, "<br>\n");
+
+$HTMLOUT.="<div class='btn-group text-center'><button class='btn btn-primary navbar-btn btn-sm '>Descripton</button>
+<button class='btn dropdown-toggle navbar-btn btn-primary btn-sm' data-toggle='dropdown'>
+<span class='caret'></span> </button>
+	 <ul class='dropdown-menu dropdownmenu pull-left'><li><div class='' style='max-width:95%;max-height:7.5rem;overflow:scroll;font-size:0.8em;color:#000;'>$result</div></li></ul></div>";
+}else{
+$HTMLOUT.="<div class='btn-group text-center'><button class='btn btn-primary navbar-btn btn-sm '>Descripton</button>
+<button class='btn dropdown-toggle navbar-btn btn-primary btn-sm' data-toggle='dropdown'>
+<span class='caret'></span> </button><ul class='dropdown-menu dropdownmenu pull-left'><li><b style='color:#000;'>No Description Found.</b></li></ul></div>";
+}
+$HTMLOUT.="<br>
+<span style='color:#fff;font-size:.8em;'>Airs in " . get_pretime(strtotime($item['airstamp']) - TIME_NOW) . " on <strong><br>{$item['show']['network']['name']}</strong></span>
+<p class='text-left squashp'><strong style='color:#fff;'>{$item['show']['name']} <a href='https://nullrefer.com/?{$item['url']}' target='_blank'></p>
+Season {$item['season']} // Episode {$item['number']}</strong></a></p>  
+
+
+  </td>";
+    }
+}
+$HTMLOUT .= "  </tr>  </table>
+</div><br>";
+echo stdhead("Upcoming TV Episodes") . $HTMLOUT . stdfoot($stdfoot);

@@ -1,0 +1,4 @@
+DirectoryIndex pastebin.php
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule ^bin/([a-z0-9]+) pastebin.php?show=$1

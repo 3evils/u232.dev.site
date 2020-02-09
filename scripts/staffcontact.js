@@ -1,0 +1,1 @@
+function checkbox(){for(i=0;i<document.forms[0].elements.length;i++)if("checkbox"==document.forms[0].elements[i].type&&document.forms[0].elements[i].name.indexOf("id")>-1){var e=document.forms[0].elements[i].checked;document.forms[0].elements[i].checked=!e}}

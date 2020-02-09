@@ -1,0 +1,42 @@
+.cat-icon-appzz, .cat-icon-cat-anime, .cat-icon-cat-appz, .cat-icon-cat-dvd, .cat-icon-cat-ebooks, 
+.cat-icon-cat-games, .cat-icon-cat-hdtv, .cat-icon-cat-images, .cat-icon-cat-linux, .cat-icon-cat-mac, 
+.cat-icon-cat-masterp, .cat-icon-cat-misc, .cat-icon-cat-miscm, .cat-icon-cat-mobile, .cat-icon-cat-music, 
+.cat-icon-cat-musicloss, .cat-icon-cat-musicpack, .cat-icon-cat-musicpacks, .cat-icon-cat-musicvid, .cat-icon-cat-oldies, 
+.cat-icon-cat-pcrips, .cat-icon-cat-ps2, .cat-icon-cat-ps3, .cat-icon-cat-psp, .cat-icon-cat-sport, 
+.cat-icon-cat-tveps, .cat-icon-cat-tvpacks, .cat-icon-cat-videopack, .cat-icon-cat-wii, .cat-icon-cat-x264, 
+.cat-icon-cat-xbox, .cat-icon-cat-xvid, .cat-icon-cat-xxx
+{ max-width: 100%; background-size: 100%; background-image: url('png.png'); }
+ 
+.cat-icon-appzz { background-position: 0 0%; background-size: 100%; }
+.cat-icon-cat-anime { background-position: 0 3.125%; background-size: 100%; }
+.cat-icon-cat-appz { background-position: 0 6.25%; background-size: 100%; }
+.cat-icon-cat-dvd { background-position: 0 9.375%; background-size: 100%; }
+.cat-icon-cat-ebooks { background-position: 0 12.5%; background-size: 100%; }
+.cat-icon-cat-games { background-position: 0 15.625%; background-size: 100%; }
+.cat-icon-cat-hdtv { background-position: 0 18.75%; background-size: 100%; }
+.cat-icon-cat-images { background-position: 0 21.875%; background-size: 100%; }
+.cat-icon-cat-linux { background-position: 0 25%; background-size: 100%; }
+.cat-icon-cat-mac { background-position: 0 28.125%; background-size: 100%; }
+.cat-icon-cat-masterp { background-position: 0 31.25%; background-size: 100%; }
+.cat-icon-cat-misc { background-position: 0 34.375%; background-size: 100%; }
+.cat-icon-cat-miscm { background-position: 0 37.5%; background-size: 100%; }
+.cat-icon-cat-mobile { background-position: 0 40.625%; background-size: 100%; }
+.cat-icon-cat-music { background-position: 0 43.75%; background-size: 100%; }
+.cat-icon-cat-musicloss { background-position: 0 46.875%; background-size: 100%; }
+.cat-icon-cat-musicpack { background-position: 0 50%; background-size: 100%; }
+.cat-icon-cat-musicpacks { background-position: 0 53.125%; background-size: 100%; }
+.cat-icon-cat-musicvid { background-position: 0 56.25%; background-size: 100%; }
+.cat-icon-cat-oldies { background-position: 0 59.375%; background-size: 100%; }
+.cat-icon-cat-pcrips { background-position: 0 62.5%; background-size: 100%; }
+.cat-icon-cat-ps2 { background-position: 0 65.625%; background-size: 100%; }
+.cat-icon-cat-ps3 { background-position: 0 68.75%; background-size: 100%; }
+.cat-icon-cat-psp { background-position: 0 71.875%; background-size: 100%; }
+.cat-icon-cat-sport { background-position: 0 75%; background-size: 100%; }
+.cat-icon-cat-tveps { background-position: 0 78.125%; background-size: 100%; }
+.cat-icon-cat-tvpacks { background-position: 0 81.25%; background-size: 100%; }
+.cat-icon-cat-videopack { background-position: 0 84.375%; background-size: 100%; }
+.cat-icon-cat-wii { background-position: 0 87.5%; background-size: 100%; }
+.cat-icon-cat-x264 { background-position: 0 90.625%; background-size: 100%; }
+.cat-icon-cat-xbox { background-position: 0 93.75%; background-size: 100%; }
+.cat-icon-cat-xvid { background-position: 0 96.875%; background-size: 100%; }
+.cat-icon-cat-xxx { background-position: 0 100%; background-size: 100%; }

@@ -1,0 +1,9 @@
+
+===================================================
+ Date: Wed, 01 May 2019 15:52:30 +0100
+ Error Number: 1062
+ Error: Duplicate entry 'Wookie' for key 'username'
+ IP Address: 176.251.73.187
+ in file /var/www/takesignup.php on line 132
+ URL:/takesignup.php
+ Username: []

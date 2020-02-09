@@ -1,0 +1,80 @@
+/********************************************************
+* Customized profile
+* Version: 1.1 
+* Official support: SmfPersonal
+* Founder: ^HeRaCLeS^
+* Date: 2010
+/**********************************************************/
+.postarea, .moderatorbar
+{
+   margin: 0 0 0 17em;
+   text-align: left;
+}
+.poster ul li
+{
+	background: #FAFAFA;
+	border: 1px solid #CCC;
+	color: #4D4D4D;
+	margin-bottom: 1px;
+	padding: 3px;
+	text-align: center;
+}
+.poster li.stars, .poster li.avatar, .poster li.blurb, li.postcount, li.im_icons ul
+{
+	margin-top: 0px;
+}
+.poster ul li img, .poster ul li ul img
+{
+	vertical-align: middle;
+}
+.poster ul li ul li, .poster ul li ul
+{
+	background: none;
+	border: none;
+	margin: 0 auto;
+	padding: 0;
+}
+.poster ul, .poster h4
+{
+	margin:0 auto;
+	width: 90%;
+}
+.poster ul li
+{
+	text-shadow:0px 0px 3px #444;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	background: #fff url(../images/Amarillo/Shadow.png) repeat-x top;
+}
+.poster > ul.reset
+{
+	-moz-box-shadow:3px 3px 5px #191919;
+	-webkit-box-shadow:3px 3px 5px #191919;
+	box-shadow:3px 3px 5px #191919;
+	border:solid 1px #c0c0c0;
+	-moz-border-radius:10px 10px  0 0;
+	-webkit-border-radius: 10px 10px  0 0;
+	border-radius: 10px 10px  0 0;
+	background: #fff url(../images/Amarillo/Top.png) no-repeat top;
+	padding: 4px;
+}
+.poster > ul.reset li.username
+{
+	background: none;
+	border: none;
+	margin: 0 auto;
+	padding: 0;
+}
+.poster > ul.smalltext
+{
+	background: #fff url(../images/Amarillo/Body.png) no-repeat top;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+}
+.poster
+{
+	padding:8px;
+}
+

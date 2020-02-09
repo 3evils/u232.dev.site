@@ -1,0 +1,46 @@
+{
+  "name": "foundation-sites-template",
+  "version": "1.0.0",
+  "description": "Basic template for a new Foundation for Sites project.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp sass"
+  },
+  "author": "ZURB <foundation@zurb.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zurb/foundation-sites/issues",
+    "email": "foundation@zurb.com"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
+    "bootstrap": "^4.0.0-alpha.6",
+    "bootswatch": "^4.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": ">=3.3.1",
+    "motion-ui": "~1.2.3",
+    "what-input": "^5.0.5"
+  },
+  "devDependencies": {
+    "browser-sync": "2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-image": "^4.3.0",
+    "gulp-imgminify": "0.0.5",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-minify": "^2.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-watch": "^5.0.0",
+    "install": "^0.11.0",
+    "npm": "^5.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iseeyoucopy/Black-Theme-using-Foundation.git"
+  },
+  "private": true
+}

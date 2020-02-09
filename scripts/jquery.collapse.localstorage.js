@@ -1,0 +1,1 @@
+$(".collapse").on("hidden.bs.collapse",function(o){o.stopPropagation(),this.id&&(localStorage[this.id]="true")}).on("shown.bs.collapse",function(o){o.stopPropagation(),this.id&&localStorage.removeItem(this.id)}).each(function(){this.id&&"true"===localStorage[this.id]&&$(this).collapse("hide")});

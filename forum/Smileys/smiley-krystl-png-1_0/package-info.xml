@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+
+<!--
+Package: Smiley - Krystl
+©2010 Brannon Hall - All Rights Reserved
+-->
+
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>brannon:smiley-krystl</id>
+	<name>Krystl Smileys</name>
+	<version>1.0</version>
+
+	<type>modification</type>
+
+	<install>
+		<readme>readme.txt</readme>
+		<require-dir name="krystl-blue" destination="$smileysdir" />
+		<require-dir name="krystl-brown" destination="$smileysdir" />
+		<require-dir name="krystl-cyan" destination="$smileysdir" />
+		<require-dir name="krystl-darkgreen" destination="$smileysdir" />
+		<require-dir name="krystl-darkyellow" destination="$smileysdir" />
+		<require-dir name="krystl-green" destination="$smileysdir" />
+		<require-dir name="krystl-orange" destination="$smileysdir" />
+		<require-dir name="krystl-pink" destination="$smileysdir" />
+		<require-dir name="krystl-purple" destination="$smileysdir" />
+		<require-dir name="krystl-red" destination="$smileysdir" />
+		<require-dir name="krystl-white" destination="$smileysdir" />
+		<require-dir name="krystl-yellow" destination="$smileysdir" />
+	</install>
+	
+	<uninstall>
+		<remove-dir name="$smileysdir/krystl-blue" />
+		<remove-dir name="$smileysdir/krystl-brown" />
+		<remove-dir name="$smileysdir/krystl-cyan" />
+		<remove-dir name="$smileysdir/krystl-darkgreen" />
+		<remove-dir name="$smileysdir/krystl-darkyellow" />
+		<remove-dir name="$smileysdir/krystl-green" />
+		<remove-dir name="$smileysdir/krystl-orange" />
+		<remove-dir name="$smileysdir/krystl-pink" />
+		<remove-dir name="$smileysdir/krystl-purple" />
+		<remove-dir name="$smileysdir/krystl-red" />
+		<remove-dir name="$smileysdir/krystl-white" />
+		<remove-dir name="$smileysdir/krystl-yellow" />
+	</uninstall>
+</package-info>

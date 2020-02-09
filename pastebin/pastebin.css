@@ -1,0 +1,228 @@
+/*
+The cleverer parts of this stylesheet came from
+The Layout Reservoir - well worth a look.
+http://www.bluerobot.com/web/layouts/
+*/
+
+body {
+	color:#333;
+	background-color: #ddd;
+	margin:0px;
+	padding:0px;
+	font:11px verdana, arial, helvetica, sans-serif;
+}
+h1 {
+	xborder-top: 1px solid #3d8ea8;
+	xborder-bottom: 1px solid #005069;
+	xborder-right: 1px solid #3d8ea8;
+	xborder-left: 1px solid #3d8ea8;
+	background-color: #666;
+	color: #ffffff;
+	font-family: trebuchet ms, verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+	padding: 3px 0px 3px 10px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+p {
+	font:11px/20px verdana, arial, helvetica, sans-serif;
+	margin:0px 10px 10px 10px;
+}
+select {
+	font:11px/20px verdana, arial, helvetica, sans-serif;
+}
+label {
+	font-weight:bold;
+}
+div.syntax {
+	background:white;
+}
+div.syntax a {
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: normal;
+	color:black;
+	text-decoration:underline;
+}
+a,a:visited,a:link,a:hover {
+	color:#0066CC;
+	font-size:11px;
+	font-family:verdana, arial, helvetica, sans-serif;
+	font-weight:600;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+h1 a {
+	color:#999999;
+	text-decoration:underline;
+	font-weight:bold;
+}
+h1 a:link {
+	color:#999999;
+}
+h1 a:visited {
+	color:#999999;
+}
+h1 a:hover {
+	color:#0066CC;
+	background-color:transparent;
+}
+#content h1 {
+	background-color: #666;
+}
+a.code {
+	text-decoration:underline;
+	font-family:courier, fixed;
+	font-weight:normal;
+}
+a.code:link {
+	color:#09c;
+}
+a.code:visited {
+	color:#07a;
+}
+a.code:hover {
+	text-decoration:underline;
+}
+code {
+	font-size:12px;
+	width:98%;
+}
+.codeedit, .codeedit:hover, .codeedit:focus {
+	font-size:12px;
+	width:98%;
+}
+input, select, textarea {
+	background:#CCCCCC;
+	border: solid 1px #808080;
+	outline:none;
+}
+input:hover, select:hover, textarea:hover, input:focus, select:focus, textarea:focus {
+	border: solid 1px #808080;
+	background-color: #FFF8C6;
+	outline:none;
+}
+input[type=submit] {
+	font-weight:bold;
+	color:#222;
+}
+#titlebar {
+	padding: 15px 0px 0px 5px;
+	height:32px;
+	xborder-top: solid 1px #73a5d3;
+	xborder-bottom: solid 1px #39526b;
+	background-color: #333333;
+	color: #999999;
+	font-size:14px;
+	font-family:tahoma;
+	font-weight:bold;
+	margin-bottom: 11px;
+}
+.nav {
+	margin: 0px 5px 0px 5px;
+}
+#Content>p {
+	margin:0px;
+}
+#Content>p+p {
+	text-indent:30px;
+}
+#content {
+	margin:0px 0px 50px 150px;
+	padding:5px;
+	xbackground-color: #FFF8EC;
+	xborder:1px solid black;
+}
+#menu {
+	position:absolute;
+	top:47px;
+	left:0px;
+	width:170px;
+	xpadding:5px;
+	background-color: #999999;
+	xborder:1px solid black;
+	line-height:17px;
+	overflow: hidden;
+	/* IE5 Hack */
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	width:140px;
+}
+#menu h1 {
+	font-weight:bold;
+}
+/* be nice to Opera 5 */
+body>#Menu {
+	width:170px;
+}
+#menu>p {
+	margin:5px 10px 5px 10px;
+	line-height:1.5em;
+}
+li.highlight {
+	background-color: #ddd;
+}
+#menu ul {
+	margin-left:15px;
+	margin-top:0px;
+	padding-left:0px;
+}
+#menu li {
+	list-style-type: square;
+	line-height: 11px;
+	padding-bottom: 3px;
+}
+#namebox {
+	float:left;
+}
+#expirybox {
+	float:left;
+	margin-left:20px;
+}
+#expirybox label {
+	padding-left:3px;
+	padding-right:3px;
+}
+#expirybox label.current {
+	background:#CCCCCC;
+}
+#expiryinfo {
+	color:#000000;
+	font-style:italic;
+}
+#end {
+	clear:both;
+}
+table.diff {
+	background:white;
+}
+table.diff td {
+	text-align:right;
+	padding-left:3px;
+	padding-right:3px;
+	font-size:8pt;
+}
+table.diff td.code {
+	text-align:left;
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: normal;
+}
+table.diff td.code pre {
+	margin:0;
+	padding:0;
+}
+table.diff tr.new {
+	background:#ddddff;
+}
+table.diff tr.old {
+	background:#ffdddd;
+}
+table.diff tr.hidenew {
+	display:none;
+}
+table.diff tr.hideold {
+	display:none;
+}

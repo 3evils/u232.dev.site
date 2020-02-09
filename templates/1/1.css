@@ -1,0 +1,131 @@
+/**
+ /-------------------------------------------------------------------------\
+|   https://github.com/Bigjoos/ -------------------------------------------|
+|--------------------------------------------------------------------------|
+|   Licence Info: GPL  ----------------------------------------------------|
+|--------------------------------------------------------------------------|
+|   Copyright (C) 2010 U-232 V4	-------------------------------------------|
+|--------------------------------------------------------------------------|
+|   A bittorrent tracker source based on TBDev.net/tbsource/bytemonsoon. --|
+|--------------------------------------------------------------------------|
+|   Project Leaders: Mindless, Autotron, whocares, son.--------------------|
+ \------------------------------------------------------------------------/
+*/
+
+.starter-template {padding: 40px 15px;text-align: center;}
+.shout-table {width: 100%;max-width: 100%;margin-bottom: 3px;overflow: hidden;border: none;height: 250px;}
+.shout-m-top{margin-top: -2px; }
+/* Torrent Module Badges */
+[class^="badge-"],
+[class*=" badge-"] {display: inline-block;width: 14px;height: 14px;margin-right: .3em;line-height: 14px;vertical-align: text-top;
+background: url(/pic/module_badges.png);background-position: 14px 14px;background-repeat: no-repeat;margin-top: 1px;}
+.module {position:relative;}
+.module .tbadge {position:absolute;right:0;top:0;z-index:1;opacity:0.65;}
+.module .tbadge-hot {background-position:0 0;}
+.module .tbadge-top {background-position:0 -50px;}
+.module .tbadge-free {background-position:0 -100px;}
+.module .tbadge-new {background-position:0 -150px;}
+.tbadge{position:absolute;top:0px;right:0px;z-index:1}
+.tbadge { background: url(/pic/module_badges.png); }
+.tbadge{position:absolute;top:0px;right:0px;z-index:1}
+.tbadge{top:-5px;right:-5px;width:50px;height:50px}
+.tbadge-hot{background-position:0 0; margin-right: -3px; margin-top: -3px;}
+.tbadge-top{background-position:0 -50px; margin-right: -3px; margin-top: -3px;}
+.tbadge-free{background-position:0 -100px; margin-right: -3px; margin-top: -3px;}
+.tbadge-new{background-position:0 -150px; margin-right: -3px; margin-top: -3px;}
+/*Torrent Module Badge end*/
+
+ /*Donations start*/
+.donate-td{background: transparent;display: block;border: 2px;}
+.donate-td1{background: grey;display: block;border: 2px;}
+.donate-table{width: 140px;height: 20px;border: 2px;display: block;}
+/*Donations end*/
+#marqueecontainer{
+position: relative; width: 99%; height: 120px; background-color: rgba(0,0,0,.09);
+overflow: hidden; border: none; padding: 2px; padding-left: 4px; text-align:left; }
+#marqueecontainer img {border-width:none;}
+/**pm_system**/
+.text-resize {min-width:200px;padding:10px;vertical-align: top;}
+.movedown { margin-top:-25%;}
+.moveup {margin-top:-6.75%;}
+@media only screen and (min-width:319px) and (max-width:479px) {
+.moveup {margin-top:10%;}
+.text-resize {width:50%;}
+.form-control {width:50%;}
+}
+@media only screen and (min-width:480px) and (max-width:599px) {
+.moveup {margin-top:10%;}
+}
+@media only screen and (min-width:600px) and (max-width:800px) {
+.moveup {margin-top:10%;}
+}
+/** Cpatcha Links Settings ------------------------------------------------------------ */
+.cimage {border: 1px solid #eee; }
+.captchaImage {margin:0 2px;}
+.captchaImages {margin: 5px auto;width:350px;text-align:center;}
+.simpleCaptchaSelected {border: 2px solid #999; border-radius: 3px; -webkit-border-radius: 3px; }
+
+@media only screen and (min-width:319px) and (max-width:479px) {
+.captchaImage {margin-left:-14%;margin-right:45px; padding-left:0px;}
+.form-control {width:100%;}
+}
+/**
+@media only screen and (min-width:480px) and (max-width:599px) {
+//.captchaImage {margin-right:60%;}
+}**/
+@media only screen and (min-width:600px) and (max-width:800px) {
+.captchaImage {margin-right:9%;margin-left:-10%;}
+}
+/** End Cpatcha Links Settings ------------------------------------------------------------ */
+
+/**login**/
+@media only screen and (min-width:319px) and (max-width:479px) {
+.adjust {margin-left:-60%;width:250%;}
+}
+@media only screen and (min-width:480px) and (max-width:599px) {
+.adjust {margin-left:-70%;width:250%;}
+}
+@media only screen and (min-width:600px) and (max-width:799px) {
+.adjust {margin-left:-70%;width:250%;}
+}
+@media only screen and (min-width:800px) and (max-width:1023px) {
+.adjust {margin-left:-70%;width:250%;}
+}
+
+/**upload**/
+.embed-responsive1{width:600px;height:48px; border:none;}
+.para{display:none;}
+@media only screen and (min-width:319px) and (max-width:479px) {
+.embed-responsive1{width:220px;height:100px;}
+.btn-adjust {width:245px;}
+}
+
+/**userblocks**/
+.userblock{width:25%}
+
+/**userdetails-edit**/
+@media only screen and (min-width: 767px)and (max-width:1022px) {
+textarea.shrink { width:85%; }
+}
+@media only screen and (min-width: 1024px)and (max-width:1200px) {
+textarea.shrink { width:85%; }
+}
+
+
+/**Recommended torrents**/
+.squashprec {max-width:150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+td.rec_col {
+ font-weight: bold;
+font-size:.8em;
+  float: left;
+  width: 15%;
+  height: auto;
+  margin: 0.1em;
+  padding-left:5px;
+  padding-right:0px;
+  color: #ffffff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}

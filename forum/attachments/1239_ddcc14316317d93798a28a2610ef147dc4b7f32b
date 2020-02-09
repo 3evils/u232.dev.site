@@ -1,0 +1,436 @@
+# This tcl-script is using two tables: 'releases' and 'releases_all'.
+# Use bashscript 'predb3_backup' as cronjob to delete entries older than x days every day in 'releases'.
+# So you keep this db small to find releases quick.
+# Im not a MySQL-Freak. If u know a way to make db-requests faster, so tell me please =) 
+#
+# NyFAZ (tryharderandfail@gmx.de)
+#
+# mysql-usage:
+#
+# user@server:~$ mysql -u USERNAME -h localhost -pPASSWORD    	<<< NO SPACE BETWEEN "-p" and "PASSWORD"
+# mysql> create database if not exists predb;			      <<< if you don`t have 1
+# mysql> use predb;						            <<< your database
+# mysql> CREATE TABLE IF NOT EXISTS `releases` (
+#  `releasename` varchar(255) DEFAULT NULL,
+#  `section` varchar(10) DEFAULT NULL,
+#  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+#  `nuked` int(11) DEFAULT NULL,
+#  `nukereason` varchar(255) DEFAULT NULL,
+#  `nuketime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+#  `releasetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+#) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+# mysql> CREATE TABLE IF NOT EXISTS `releases_all` (
+#  `releasename` varchar(255) DEFAULT NULL,
+#  `section` varchar(10) DEFAULT NULL,
+#  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+#  `nuked` int(11) DEFAULT NULL,
+#  `nukereason` varchar(255) DEFAULT NULL,
+#  `nuketime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+#  `releasetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+#) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+# mysql> quit
+# 
+# thats all =) 
+# 
+# i suggest u look at the table before quit mysql.
+# i hope it looks like mine =)
+#
+# mysql> explain releases;
+# +-------------+--------------+------+-----+-------------------+-------+
+# | Field       | Type         | Null | Key | Default           | Extra |
+# +-------------+--------------+------+-----+-------------------+-------+
+# | releasename | varchar(255) | YES  |     | NULL              |       | 
+# | section     | varchar(10)  | YES  |     | NULL              |       | 
+# | time        | timestamp(14)| NO   |     | CURRENT_TIMESTAMP |       | 
+# | nuked       | int(11)      | YES  |     | NULL              |       | 
+# | nukereason   | varchar(255) | YES  |     | NULL              |       | 
+# +-------------+--------------+------+-----+-------------------+-------+
+
+# you must have installed 'mysqltcl'
+package require mysqltcl
+
+# edit if needed
+set mysql(host)		"localhost"
+	
+# must edit into your username
+set mysql(user)		""	
+
+# must edit to your password
+set mysql(pass)		""	
+
+# must edit to your database
+set mysql(db)		""		
+
+# edit if needed
+set mysql(port)		"3306"		
+
+# leave it empty
+set mysql(handle)	""		
+
+# must edit to your #prechan
+set mysql(prechan)	"#addpre"	
+
+# must edit to your #echochan, u may use two or more chans seperated by a "," >>> "#test1,#test2,#test3"
+set mysql(echochan)	""
+
+variable mysql
+
+#edit, if 'find / -name libmysqltcl*.so' shows another dir or another version
+variable libMySQLTcl "/usr/lib/tcltk/mysqltcl-3.05/libmysqltcl3.05.so"
+
+#error if lib not loaded
+if {[catch {load $libMySQLTcl Mysqltcl} errorMsg]} {
+  putlog "\[PreBot\] ... $errorMsg"
+  return
+}
+
+#error if unable to connect to mysql
+if {[catch {set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]} errorMsg]} {
+  putlog "\[PreBot\] ... Unable to connect to MySQL server: $errorMsg"
+  return
+}
+
+mysqluse $mysql(handle) $mysql(db)
+
+bind pub - !dupe dupe
+proc dupe {nick uhost handle chan arg} {
+	global mysql libMySQLTcl
+	if {[string trim $arg] == ""} {
+		putserv "privmsg $nick :\[DUPE\] Error: No argument given"
+		putserv "privmsg $nick :\[DUPE\] Press <!help> for correct usage of dupe"
+		putserv "privmsg $nick : "
+		{return}
+	}
+	if {$chan != $mysql(echochan)} {return}
+	set sl 0
+	putserv "privmsg $nick :\[DUPE\]\002 Here the last \(max\) 10 dupes:\002"
+	putserv "privmsg $nick : "
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	foreach i [mysqlsel $mysql(handle) "SELECT * FROM releases WHERE releasename LIKE '%$arg%' ORDER BY time DESC;" -list] {
+		incr sl
+		set rel [lrange [lindex $i 0] 0 0]
+		set query [mysqlquery $mysql(handle) "SELECT section FROM releases WHERE releasename ='$rel';"]
+		set yo1 [mysqlnext $query]	
+		putserv "privmsg $nick :\[DUPE\] \[$yo1\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT UNIX_TIMESTAMP(`releasetime`) 	FROM releases WHERE releasename LIKE '$rel';" -list]] in my database"
+		if {$sl >= 10} {
+			putserv "privmsg $nick : "
+			{return}
+		}
+	}
+	putserv "privmsg $nick :\[DUPE\]\002 No \(more\) dupes found\002"
+	putserv "privmsg $nick : "
+}  
+
+bind pub - !help help
+
+proc help { nick host hand chan arg } {
+	global mysql libMySQLTcl
+	if {$chan != $mysql(echochan)} {return}
+	puthelp "PRIVMSG $nick :<---------------- \002Prebot by NyFAZ\002 ---------------->"
+	puthelp "PRIVMSG $nick : "
+	puthelp "PRIVMSG $nick :Find dupes             : !dupe <part of releasename>"
+	puthelp "PRIVMSG $nick :Find releases          : !pre <part of releasename>"
+	puthelp "PRIVMSG $nick :Find all releases      : !pre_all <part of releasename>"
+	puthelp "PRIVMSG $nick : "
+	puthelp "PRIVMSG $nick :<--------------- \002Written for Zauber\002 -------------->"
+}
+
+bind pub - !pre pre
+
+proc pre {nick uhost handle chan arg} {
+	global mysql libMySQLTcl
+	if {$chan != $mysql(echochan)} {return}
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	set yo [mysqlsel $mysql(handle) "SELECT * FROM releases WHERE releasename LIKE '%$arg%' ORDER BY time DESC;" -list]
+	set rel [lrange [lindex $yo 0] 0 0]
+	if {[string trim $rel] == ""} {
+		putserv "privmsg $chan :\[PRE\] No record matching \002$arg\002"
+		{return}
+		}
+	set sec [mysqlnext [mysqlquery $mysql(handle) "SELECT section FROM releases WHERE releasename ='$rel';"]]
+	set nreason [mysqlnext [mysqlquery $mysql(handle) "SELECT nukereason FROM releases WHERE releasename = '$rel';"]]	 
+	set nukedchk [mysqlnext [mysqlquery $mysql(handle) "SELECT nuked FROM releases WHERE releasename = '$rel';"]]
+	if {$nukedchk == 1} {
+		#nuked
+		set ntime [mysqlnext [mysqlquery $mysql(handle) "SELECT nuketime FROM releases WHERE releasename = '$rel';"]]
+		putserv "privmsg $chan :\002Your request:\002"
+		putserv "privmsg $chan :\[\0034NUKED\003\] \[$sec\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT 
+		UNIX_TIMESTAMP(`releasetime`) FROM releases WHERE releasename = '$rel';" -list]] in my database REASON: $nreason \[\0034NUKETiME\003\] [timeago [mysqlsel $mysql(handle) "SELECT UNIX_TIMESTAMP(`nuketime`) FROM releases WHERE releasename = '$rel';" -list]] ago"
+	} elseif {$nukedchk == 2}  {
+		#unnuked
+		putserv "privmsg $chan :\002Your request:\002"
+		putserv "privmsg $chan :\[\0033UNNUKED\003\] \[$sec\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT 
+		UNIX_TIMESTAMP(`releasetime`) FROM releases WHERE releasename = '$rel';" -list]] in my database REASON: $nreason"
+	} else {
+		putserv "privmsg $chan :\002Your request:\002"
+		putserv "privmsg $chan :\[PRE\] \[$sec\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT UNIX_TIMESTAMP(`releasetime`) FROM 			releases WHERE releasename = '$rel';" -list]] in my database"
+	}
+	mysqlclose $mysql(handle)
+}
+
+
+bind pub - !pre_all pre_all
+
+proc pre_all {nick uhost handle chan arg} {
+	global mysql libMySQLTcl
+	if {$chan != $mysql(echochan)} {return}
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	set yo [mysqlsel $mysql(handle) "SELECT * FROM releases_all WHERE releasename LIKE '%$arg%' ORDER BY time DESC;" -list]
+	set rel [lrange [lindex $yo 0] 0 0]
+	putserv "privmsg $chan :\[PRE_ALL\] Searching all, this will take a while"
+	if {[string trim $rel] == ""} {
+		putserv "privmsg $chan :\[PRE_ALL\] No record matching \002$arg\002"
+		{return}
+		}
+	set sec [mysqlnext [mysqlquery $mysql(handle) "SELECT section FROM releases_all WHERE releasename ='$rel';"]]
+	set nreason [mysqlnext [mysqlquery $mysql(handle) "SELECT nukereason FROM releases_all WHERE releasename = '$rel';"]]	 
+	set nukedchk [mysqlnext [mysqlquery $mysql(handle) "SELECT nuked FROM releases_all WHERE releasename = '$rel';"]]
+	if {$nukedchk == 1} {
+		#nuked
+		set ntime [mysqlnext [mysqlquery $mysql(handle) "SELECT nuketime FROM releases_all WHERE releasename = '$rel';"]]
+		putserv "privmsg $chan :\002Your request:\002"
+		putserv "privmsg $chan :\[\0034NUKED\003\] \[$sec\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT 
+		UNIX_TIMESTAMP(`releasetime`) FROM releases_all WHERE releasename = '$rel';" -list]] in my database REASON: $nreason \[\0034NUKETiME\003\] [timeago [mysqlsel $mysql(handle) "SELECT UNIX_TIMESTAMP(`nuketime`) FROM releases_all WHERE releasename = '$rel';" -list]] ago"
+	} elseif {$nukedchk == 2}  {
+		#unnuked
+		putserv "privmsg $chan :\002Your request:\002"
+		putserv "privmsg $chan :\[\0033UNNUKED\003\] \[$sec\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT 
+		UNIX_TIMESTAMP(`releasetime`) FROM releases_all WHERE releasename = '$rel';" -list]] in my database REASON: $nreason"
+	} else {
+		putserv "privmsg $chan :\002Your request:\002"
+		putserv "privmsg $chan :\[PRE_ALL\] \[$sec\] \[\002$rel\002\] since [timeago [mysqlsel $mysql(handle) "SELECT UNIX_TIMESTAMP(`releasetime`) FROM 			releases_all WHERE releasename = '$rel';" -list]] in my database"
+	}
+	mysqlclose $mysql(handle)
+}
+
+
+bind pub - !addpre addpre
+
+proc addpre {nick uhost handle chan args} {
+	global mysql libMySQLTcl
+	if {$chan != $mysql(prechan)} {return}
+	set section [lrange [lindex $args 0] 1 1]
+	set rlse [lrange [lindex $args 0] 0 0]
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	set row ""
+	set query [mysqlquery $mysql(handle) "SELECT * FROM releases WHERE releasename = '$rlse';"]
+	set row [mysqlnext $query]
+	if {$row == ""} {
+		set query1 [mysqlsel $mysql(handle) "INSERT INTO releases (releasename, section, releasetime) VALUES ('$rlse','$section','[clock format 	[clock seconds] -format {%Y.%m.%d %H:%M:%S}]');"]
+		set query2 [mysqlsel $mysql(handle) "INSERT INTO releases_all (releasename, section, releasetime) VALUES ('$rlse','$section','[clock format [clock seconds] -format {%Y.%m.%d %H:%M:%S}]');"]
+		putlog "\[PreBot\] \[ADDPRE\] added -> $rlse"
+		if {[string match *german* [string tolower $rlse]] == 1} {
+			putserv "privmsg $mysql(echochan) :\[PRE\] \[ [colorsection $section] \] \[ \0033$rlse\003 \]"
+		} else {
+			putserv "privmsg $mysql(echochan) :\[PRE\] \[ [colorsection $section] \] \[ $rlse \]"
+		}
+	}
+	mysqlclose $mysql(handle)
+}
+
+bind pub - !nuke nuke
+
+proc nuke {nick uhost handle chan args} {
+	global mysql libMySQLTcl
+	if {$chan != $mysql(prechan)} {return}
+	set grund [lrange [lindex $args 0] 1 end]
+	set rlse [lrange [lindex $args 0] 0 0]
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	set nukedchk ""
+	set query [mysqlquery $mysql(handle) "SELECT nuked FROM releases WHERE releasename = '$rlse';"]
+	set nukedchk [mysqlnext $query]
+	if {$nukedchk == "1"} {
+		set query1 [mysqlquery $mysql(handle) "UPDATE releases SET nuked = '1' WHERE releasename = '$rlse';"]
+		set query2 [mysqlquery $mysql(handle) "UPDATE releases SET nukereason = '$grund' WHERE releasename = '$rlse';"]
+		set query3 [mysqlquery $mysql(handle) "UPDATE releases SET nuketime = '[clock format [clock seconds] -format {%Y.%m.%d %H:%M:%S}]' WHERE 	releasename = '$rlse';"]
+		set query4 [mysqlquery $mysql(handle) "UPDATE releases_all SET nuked = '1' WHERE releasename = '$rlse';"]
+		set query5 [mysqlquery $mysql(handle) "UPDATE releases_all SET nukereason = '$grund' WHERE releasename = '$rlse';"]
+		set query6 [mysqlquery $mysql(handle) "UPDATE releases_all SET nuketime = '[clock format [clock seconds] -format {%Y.%m.%d %H:%M:%S}]' 		WHERE releasename = '$rlse';"]
+	} else {
+		set row ""
+		set query [mysqlquery $mysql(handle) "SELECT * FROM releases WHERE releasename = '$rlse';"]
+		set row [mysqlnext $query]
+		if {$row != ""} {
+			set query1 [mysqlquery $mysql(handle) "UPDATE releases SET nuked = '1' WHERE releasename = '$rlse';"]
+			set query2 [mysqlquery $mysql(handle) "UPDATE releases SET nukereason = '$grund' WHERE releasename = '$rlse';"]
+			set query3 [mysqlquery $mysql(handle) "UPDATE releases SET nuketime = '[clock format [clock seconds] -format {%Y.%m.%d %H:%M:%S}]' WHERE releasename = '$rlse';"]
+			set query4 [mysqlquery $mysql(handle) "UPDATE releases_all SET nuked = '1' WHERE releasename = '$rlse';"]
+			set query5 [mysqlquery $mysql(handle) "UPDATE releases_all SET nukereason = '$grund' WHERE releasename = '$rlse';"]
+			set query6 [mysqlquery $mysql(handle) "UPDATE releases_all SET nuketime = '[clock format [clock seconds] -format {%Y.%m.%d %H:%M:%S}]' 				WHERE releasename = '$rlse';"]
+			if {[string match *german* [string tolower $rlse]] == 1} {
+				putserv "privmsg $mysql(echochan) :\[\0034NUKE\003\] \[ \0033$rlse\003 \] REASON: \0034$grund\003"
+			} else {
+				putserv "privmsg $mysql(echochan) :\[\0034NUKE\003\] \[ $rlse \] REASON: \0034 $grund \003"
+			}		
+			putlog "\[PreBot\] \[NUKE\] nuked -> $rlse"
+		}
+	}
+	mysqlclose $mysql(handle)
+}
+
+bind pub - !unnuke unnuke
+
+proc unnuke {nick uhost handle chan args} {
+	global mysql libMySQLTcl
+	if {$chan != $mysql(prechan)} {return}
+	set rlse [lrange [lindex $args 0] 0 0]
+	set grund [lrange [lindex $args 0] 1 end]
+	set nukedchk ""
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	set query [mysqlquery $mysql(handle) "SELECT nuked FROM releases WHERE releasename = '$rlse';"]
+	set nukedchk [mysqlnext $query]
+	if {$nukedchk == "1"} {
+		set query1 [mysqlquery $mysql(handle) "UPDATE releases SET nuked = '2' WHERE releasename = '$rlse';"]
+		set query2 [mysqlquery $mysql(handle) "UPDATE releases SET nukereason = '$grund' WHERE releasename = '$rlse';"]
+		set query3 [mysqlquery $mysql(handle) "UPDATE releases_all SET nuked = '2' WHERE releasename = '$rlse';"]
+		set query4 [mysqlquery $mysql(handle) "UPDATE releases_all SET nukereason = '$grund' WHERE releasename = '$rlse';"]
+		if {[string match *german* [string tolower $rlse]] == 1} {
+			putserv "privmsg $mysql(echochan) :\[\0033UNNUKE\003\] \[ \0033$rlse\003 \] REASON: \0033$grund\003"
+		} else {
+			putserv "privmsg $mysql(echochan) :\[\0033UNNUKE\003\] \[ $rlse \] REASON: \0033 $grund \003"
+		}
+		putlog "\[PreBot\] \[UNNUKE\] unnuked -> $rlse"
+	}
+	mysqlclose $mysql(handle)
+}
+
+bind pub - !delpre delpre
+
+proc delpre {nick uhost handle chan args} {
+	global mysql libMySQLTcl
+	set grund [lrange [lindex $args 0] 1 end]
+	set rlse [lrange [lindex $args 0] 0 0]
+	if {$chan != $mysql(prechan)} {return}
+	set mysql(handle) [mysqlconnect -host $mysql(host) -user $mysql(user) -password $mysql(pass) -port $mysql(port) -db $mysql(db)]
+	mysqluse $mysql(handle) $mysql(db)
+	set row ""
+	set query [mysqlquery $mysql(handle) "SELECT * FROM releases WHERE releasename = '$rlse';"]
+	set row [mysqlnext $query]
+	set query1 [mysqlquery $mysql(handle) "DELETE FROM releases WHERE releasename = '$rlse';"]
+	set query2 [mysqlquery $mysql(handle) "SELECT * FROM releases_all WHERE releasename = '$rlse';"]
+	set row [mysqlnext $query2]
+	set query3 [mysqlquery $mysql(handle) "DELETE FROM releases_all WHERE releasename = '$rlse';"]
+	putlog "\[PreBot\] \[DELPRE\] deleted -> $rlse"
+	mysqlclose $mysql(handle)
+}
+
+proc colorsection { section } {
+# 0=white, 1=black, 2=darkblue, 3=darkgreen, 4=red, 5=brown, 6=magenta, 7=orange
+# 8=yellow, 9=lightgreen, 10=darkcyan, 11=lightcyan, 12=lightblue, 13=pink, 14=darkgrey, 15=lightgrey	
+global c
+set c(0)  "\0030"
+set c(1)  "\0031"
+set c(2)  "\0032"
+set c(3)  "\0033"
+set c(4)  "\0034"
+set c(5)  "\0035"
+set c(6)  "\0036"
+set c(7)  "\0037"
+set c(8)  "\0038"
+set c(9) "\0039"
+set c(10) "\00310"
+set c(11) "\00311"
+set c(12) "\00312"
+set c(13) "\00313"
+set c(14) "\00314"
+set c(15) "\00315"
+set c(16) "\003"
+set colorstring ""
+ 
+if {[string tolower $section] == "0day"} {
+	append colorstring $c(10) "" $section $c(16) 
+} elseif {[string tolower $section] == "xxx"} {
+	append colorstring $c(3) $section $c(16) 
+} elseif {[string tolower $section] == "mp3"} {
+	append colorstring $c(11) $section $c(16) 
+} elseif {[string tolower $section] == "xvid"} {
+	append colorstring $c(9) $section $c(16) 
+} elseif {[string tolower $section] == "dvdr"} {
+	append colorstring $c(7) $section $c(16) 
+} elseif {[string tolower $section] == "tv"} {
+	append colorstring $c(8) $section $c(16) 
+} elseif {[string tolower $section] == "series"} {
+	append colorstring $c(9) $section $c(16) 
+} elseif {[string tolower $section] == "mirid"} {
+	append colorstring $c(10) $section $c(16) 
+} elseif {[string tolower $section] == "vcd"} {
+	append colorstring $c(12) $section $c(16) 
+} elseif {[string tolower $section] == "svcd"} {
+	append colorstring $c(15) $section $c(16) 
+} elseif {[string tolower $section] == "games"} {
+	append colorstring $c(15) $section $c(16)
+} else {
+	append colorstring $section
+	}
+return $colorstring
+}
+
+proc since {timdiff} {
+   set Y 0
+   set M 0
+   set W 0
+   set T 0
+   set h 0
+   set m 0
+   set s 0
+   while {$timdiff >= 31536000} {
+      incr Y
+      incr timdiff -31536000
+   }
+   while {$timdiff >= 18144000} {
+      incr M
+      incr timdiff -18144000
+   }
+   while {$timdiff >= 604800} {
+      incr W
+      incr timdiff -604800
+   }
+   while {$timdiff >= 86400} {
+      incr T
+      incr timdiff -86400
+   }
+   while {$timdiff >= 3600} {
+      incr h
+      incr timdiff -3600
+   }
+   while {$timdiff >= 60} {
+      incr m
+      incr timdiff -60
+   }
+   set s $timdiff
+   return [list $Y $M $W $T $h $m $s]
+}
+
+proc timeago { prestamp } {
+ set unixtime [unixtime]
+ if {[string is integer -strict $unixtime] && [string is integer -strict $prestamp] && $unixtime < "2000000000" && $prestamp < "2000000000" } {
+  foreach {y m w d h m s} [since [expr $unixtime - $prestamp]] {break}
+  if {$y != 1} {set ys "$y years"} else {set ys "1 year"}
+  if {$w != 1} {set ws "$w weeks"} else {set ws "1 week"}
+  if {$d != 1} {set ds "$d days"} else {set ds "1 day"}
+  if {$h != 1} {set hs "$h hours"} else {set hs "1 hour"}
+  if {$m != 1} {set ms "$m minutes"} else {set ms "1 minute"}
+  if {$s != 1} {set ss "$s seconds"} else {set ss "1 second"}
+  if { $y > 0 } {
+   append dupeago $ys " " $ws " " $ds " " $hs " " $ms " " $ss
+  } elseif { $w > 0 } {
+   append dupeago $ws " " $ds " " $hs " " $ms " " $ss
+  } elseif { $d > 0 } {
+   append dupeago $ds " " $hs " " $ms " " $ss
+  } elseif { $h > 0 } {
+   append dupeago $hs " " $ms " " $ss
+  } elseif { $m > 0 } {
+   append dupeago $ms " " $ss
+  } else {
+   append dupeago $ss
+  }
+  return $dupeago
+ }
+} 
+putlog "Schon wieder Mist von nyfaz geladen \[Releasescript\]."

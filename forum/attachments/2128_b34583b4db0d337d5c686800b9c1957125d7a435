@@ -1,0 +1,67 @@
+Open therminal then 
+sudo su 
+Note: To login as administrator
+
+apt-get -y install apache2
+Note:- document root of the apache2 default vhost is /var/www/html and configuration file location is /etc/apache2/apache2.conf
+
+Note: Install php7 in ubuntu 16.04 server
+run the following commands in ubuntu 16.04 server command prompt this will install apache2 supported module for php7
+apt-get -y install php7.0 libapache2-mod-php7.0
+
+Note:
+After the installation you need to Restart the apache2 server using the following command
+systemctl restart apache2
+
+Note: Testing that php is working
+nano /var/www/html/test.php
+<?php
+phpinfo();
+?>
+
+Note:Change the owner of the file test.php to the www-data user and group
+sudo chown www-data:www-data /var/www/html/test.php
+
+http://localhost/test.php //testing the server.
+
+sudo apt-get install php7.0-fpm php7.0-mysql php7.0-common php7.0-gd php7.0-json php7.0-cli php7.0-curl
+sudo apt-get install mysql-server mysql-client libmysql++-dev libmysqld-dev
+apt-get install memcached
+apt-get install php-memcached
+
+sudo apt-get install phpmyadmin php-mbstring php-gettext libapache2-mod-php
+
+Note:    For the server selection, choose apache2.
+    Select yes when asked whether to use dbconfig-common to set up the database
+    You will be prompted for your database administrator's password
+    You will then be asked to choose and confirm a password for the phpMyAdmin application itself
+
+The installation process actually adds the phpMyAdmin Apache configuration file into the /etc/apache2/conf-enabled/ directory, where it is automatically read.
+
+The only thing we need to do is explicitly enable the PHP mcrypt and mbstring extensions, which we can do by typing:
+
+sudo phpenmod mcrypt
+sudo phpenmod mbstring
+
+Note: restart apache to make it all work.
+Note: test it in browser
+http://localhost/phpmyadmin
+
+sudo apt-get install mysql-server mysql-client libmysql++-dev libmysqld-dev libmcrypt-dev libxml2-dev memcached binutils libev-dev git apache2 php7.0-fpm php-soap php-pear php7.0-curl php7.0-mysql php7.0-mcrypt php7.0-gd sendmail php7.0-zip php7.0-json php7.0-mbstring php7.0-xml php-igbinary php-msgpack php-geoip php7.0-opcache php-memcached libapache2-mod-php7.0
+
+sudo apt-get install php7.0-fpm php7.0-cli php7.0-common php7.0-json php7.0-opcache php7.0-mysql php7.0-phpdbg php7.0-mbstring php7.0-gd php7.0-imap php7.0-ldap php7.0-pgsql php7.0-pspell php7.0-recode php7.0-snmp php7.0-tidy php7.0-dev php7.0-intl php7.0-gd php7.0-curl php7.0-zip php7.0-xml
+
+mysql -u root -p
+
+Next, issue following command :
+	
+CREATE DATABASE phpmyadmin;
+GRANT ALL ON phpmyadmin.* TO phpmyadmin@localhost IDENTIFIED BY 'changethispassword';
+
+Note: Exit mysql by ctrl z or ctrl q
+
+Adjust Apache2 config file to make phpMyAdmin accessible end off the file:
+Include /etc/phpmyadmin/apache.conf
+
+	
+service apache2 restart
